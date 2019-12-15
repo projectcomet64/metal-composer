@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using M64MM.Additions;
 using M64MM.Utils;
+using static MetalComposer.ComposerBase;
 namespace MetalComposer
 {
     public class Module : IModule
@@ -18,7 +19,7 @@ namespace MetalComposer
 
         public void Close(EventArgs e)
         {
-
+            SetAnimOverride(true);
         }
 
         public List<ToolCommand> GetCommands()
@@ -54,8 +55,26 @@ namespace MetalComposer
         {
             if (Core.CurrentLevelID > 3)
             {
-                ComposerBase.UpdateCoreAddress();
-                form.UpdateCoreAddressText(ComposerBase.CoreAddress);
+                form.UpdateCoreAddressText(CoreAddress);
+                if (OverrideAnimation)
+                {
+                    SetAnimOverride(false);
+                    switch (PlaybackStatus)
+                    {
+                        case PlaybackState.PAUSED:
+                            //Do nothing. We still want to edit the thing
+                            break;
+                        case PlaybackState.PLAYING:
+                            AnimationTimer += (short)Speed;
+                            break;
+                        case PlaybackState.REWIND:
+                            AnimationTimer -= (short)Speed;
+                            break;
+                    }
+
+                }
+                form.UpdateMaxFrames(MaxFrames);
+                form.UpdateFramesTimer(AnimationTimer);
             }
         }
     }

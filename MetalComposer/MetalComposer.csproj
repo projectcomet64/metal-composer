@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="M64MM.Addon">
-      <HintPath>..\..\M64MM\M64MM.Addon\bin\Debug\netstandard1.2\M64MM.Addon.dll</HintPath>
-    </Reference>
-    <Reference Include="M64MM.Utils">
-      <HintPath>..\..\M64MM\M64MM.Utils\bin\Debug\M64MM.Utils.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -55,13 +49,25 @@
     <Compile Include="ComposerForm.Designer.cs">
       <DependentUpon>ComposerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoopState.cs" />
     <Compile Include="Module.cs" />
+    <Compile Include="PlaybackState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ComposerForm.resx">
       <DependentUpon>ComposerForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\M64MM\M64MM.Addon\M64MM.Addon.csproj">
+      <Project>{d4896a3f-245e-42da-b85f-c86ec0535abf}</Project>
+      <Name>M64MM.Addon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\M64MM\M64MM.Utils\M64MM.Utils.csproj">
+      <Project>{3587b41b-7005-49ce-a884-6986adc8ca01}</Project>
+      <Name>M64MM.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetalComposer", "MetalComposer\MetalComposer.csproj", "{2577DC81-102B-43FE-8BCE-7B53CA69E71E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M64MM.Addon", "..\M64MM\M64MM.Addon\M64MM.Addon.csproj", "{D4896A3F-245E-42DA-B85F-C86EC0535ABF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M64MM.Utils", "..\M64MM\M64MM.Utils\M64MM.Utils.csproj", "{3587B41B-7005-49CE-A884-6986ADC8CA01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2577DC81-102B-43FE-8BCE-7B53CA69E71E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2577DC81-102B-43FE-8BCE-7B53CA69E71E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2577DC81-102B-43FE-8BCE-7B53CA69E71E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4896A3F-245E-42DA-B85F-C86EC0535ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4896A3F-245E-42DA-B85F-C86EC0535ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4896A3F-245E-42DA-B85F-C86EC0535ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4896A3F-245E-42DA-B85F-C86EC0535ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3587B41B-7005-49CE-A884-6986ADC8CA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3587B41B-7005-49CE-A884-6986ADC8CA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3587B41B-7005-49CE-A884-6986ADC8CA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3587B41B-7005-49CE-A884-6986ADC8CA01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
