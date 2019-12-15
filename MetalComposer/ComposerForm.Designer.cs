@@ -48,12 +48,12 @@
             this.nudStart = new System.Windows.Forms.NumericUpDown();
             this.gbInfo = new System.Windows.Forms.GroupBox();
             this.cbLoop = new System.Windows.Forms.GroupBox();
-            this.nudEnd = new System.Windows.Forms.NumericUpDown();
+            this.cbCustomLoop = new System.Windows.Forms.CheckBox();
             this.lbLoopMode = new System.Windows.Forms.Label();
+            this.nudEnd = new System.Windows.Forms.NumericUpDown();
             this.gbPlayback = new System.Windows.Forms.GroupBox();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbCustomLoop = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
@@ -260,14 +260,15 @@
             this.cbLoop.TabStop = false;
             this.cbLoop.Text = "Loop Controls";
             // 
-            // nudEnd
+            // cbCustomLoop
             // 
-            this.nudEnd.Enabled = false;
-            this.nudEnd.Location = new System.Drawing.Point(158, 72);
-            this.nudEnd.Name = "nudEnd";
-            this.nudEnd.Size = new System.Drawing.Size(72, 20);
-            this.nudEnd.TabIndex = 17;
-            this.nudEnd.ValueChanged += new System.EventHandler(this.nudEnd_ValueChanged);
+            this.cbCustomLoop.Location = new System.Drawing.Point(22, 50);
+            this.cbCustomLoop.Name = "cbCustomLoop";
+            this.cbCustomLoop.Size = new System.Drawing.Size(68, 35);
+            this.cbCustomLoop.TabIndex = 13;
+            this.cbCustomLoop.Text = "Custom Loop";
+            this.cbCustomLoop.UseVisualStyleBackColor = true;
+            this.cbCustomLoop.CheckedChanged += new System.EventHandler(this.cbCustomLoop_CheckedChanged);
             // 
             // lbLoopMode
             // 
@@ -277,6 +278,15 @@
             this.lbLoopMode.Size = new System.Drawing.Size(61, 13);
             this.lbLoopMode.TabIndex = 18;
             this.lbLoopMode.Text = "Loop Mode";
+            // 
+            // nudEnd
+            // 
+            this.nudEnd.Enabled = false;
+            this.nudEnd.Location = new System.Drawing.Point(158, 72);
+            this.nudEnd.Name = "nudEnd";
+            this.nudEnd.Size = new System.Drawing.Size(72, 20);
+            this.nudEnd.TabIndex = 17;
+            this.nudEnd.ValueChanged += new System.EventHandler(this.nudEnd_ValueChanged);
             // 
             // gbPlayback
             // 
@@ -314,16 +324,6 @@
             this.tsmiAbout.Size = new System.Drawing.Size(52, 20);
             this.tsmiAbout.Text = "About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
-            // 
-            // cbCustomLoop
-            // 
-            this.cbCustomLoop.Location = new System.Drawing.Point(22, 50);
-            this.cbCustomLoop.Name = "cbCustomLoop";
-            this.cbCustomLoop.Size = new System.Drawing.Size(68, 35);
-            this.cbCustomLoop.TabIndex = 13;
-            this.cbCustomLoop.Text = "Custom Loop";
-            this.cbCustomLoop.UseVisualStyleBackColor = true;
-            this.cbCustomLoop.CheckedChanged += new System.EventHandler(this.cbCustomLoop_CheckedChanged);
             // 
             // ComposerForm
             // 

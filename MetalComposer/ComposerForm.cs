@@ -19,19 +19,18 @@ namespace MetalComposer
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            Hide();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
         }
 
         public void UpdateMaxFrames(ushort frames)
         {
             if (tbCurrentFrame.Value > frames)
             {
-                tbCurrentFrame.Value = frames - 1;
-            }
-            else if (tbCurrentFrame.Value < 0)
-            {
-                tbCurrentFrame.Value = 0;
+                tbCurrentFrame.Value = frames;
             }
 
             if (nudEnd.Value > frames)
@@ -61,7 +60,7 @@ namespace MetalComposer
             {
                 tbCurrentFrame.Value = timer;
             }
-            else
+            else if (timer < 0)
             {
                 tbCurrentFrame.Value = 0;
             }

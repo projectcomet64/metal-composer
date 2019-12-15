@@ -13,7 +13,7 @@ namespace MetalComposer
         };
 
         public static LoopState LoopStatus = LoopState.FORWARD;
-        private static PlaybackState _playback = PlaybackState.PAUSED;
+        private static PlaybackState _playback = PlaybackState.PLAYING;
         public static bool OverrideAnimation;
         public static bool customLoop;
 
@@ -132,8 +132,14 @@ namespace MetalComposer
         {
             get
             {
-                return BitConverter.ToUInt16(
+                ushort _maxFrames = BitConverter.ToUInt16(
     Core.ReadBytes(Core.BaseAddress + ADataAddress + 0xA, sizeof(ushort)), 0);
+                if (!customLoop)
+                {
+                    LoopStart = 0;
+                    LoopEnd = _maxFrames;
+                }
+                return _maxFrames;
             }
             private set { }
         }
@@ -171,12 +177,6 @@ namespace MetalComposer
                 LoopStart = start;
                 LoopEnd = end;
             }
-            else
-            {
-                LoopStart = 0;
-                LoopEnd = MaxFrames;
-            }
         }
-
     }
 }

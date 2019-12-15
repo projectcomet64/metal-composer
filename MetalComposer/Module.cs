@@ -20,7 +20,7 @@ namespace MetalComposer
             SetAnimOverride(true);
             if (form != null)
             {
-                form.Dispose();
+                form.Close();
             }
         }
 
@@ -67,7 +67,7 @@ namespace MetalComposer
 
         public void Update()
         {
-            if (Core.CurrentLevelID > 3 && form != null && form.IsDisposed == false)
+            if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing))
             {
                 form.UpdateCoreAddressText(CoreAddress);
                 if (OverrideAnimation)
