@@ -75,9 +75,9 @@
             this.lbAuthor.AutoSize = true;
             this.lbAuthor.Location = new System.Drawing.Point(12, 79);
             this.lbAuthor.Name = "lbAuthor";
-            this.lbAuthor.Size = new System.Drawing.Size(188, 13);
+            this.lbAuthor.Size = new System.Drawing.Size(263, 13);
             this.lbAuthor.TabIndex = 3;
-            this.lbAuthor.Text = "by GlitchyPSI, for M64MM3 Classic A1";
+            this.lbAuthor.Text = "by GlitchyPSI, for M64MM3 Classic A1 (Project Comet)";
             // 
             // lbDesc
             // 
