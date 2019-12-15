@@ -8,7 +8,7 @@ namespace MetalComposer
         public AboutForm()
         {
             InitializeComponent();
-            lbVersion.Text = "Version: " + Application.ProductVersion;
+            lbVersion.Text = "Version: " + ProductVersion + ", running on " + Application.ProductName + " v" + Application.ProductVersion; 
         }
 
         private void llSM64Decomp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
