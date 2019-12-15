@@ -15,6 +15,7 @@ namespace MetalComposer
         public static LoopState LoopStatus = LoopState.FORWARD;
         private static PlaybackState _playback = PlaybackState.PAUSED;
         public static bool OverrideAnimation;
+        public static bool customLoop;
 
         public static PlaybackState PlaybackStatus
         {
@@ -72,37 +73,44 @@ namespace MetalComposer
             }
             set
             {
-                if (value > MaxFrames)
+                if (value > LoopEnd)
                 {
                     switch (LoopStatus)
                     {
                         case LoopState.NONE:
                             PlaybackStatus = PlaybackState.PAUSED;
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(MaxFrames), 4));
+                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
                         case LoopState.FORWARD:
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(((ushort)value - MaxFrames)), 4));
+                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(((ushort)value - LoopEnd + LoopStart)), 4));
                             break;
                         case LoopState.PINGPONG:
                             PlaybackStatus = PlaybackState.REWIND;
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(MaxFrames), 4));
+                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
                     }
                 }
-                else if (value < 0)
+                else if (value < LoopStart)
                 {
                     switch (LoopStatus)
                     {
                         case LoopState.NONE:
                             PlaybackStatus = PlaybackState.PAUSED;
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(0), 4));
+                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             break;
                         case LoopState.FORWARD:
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(MaxFrames), 4));
+                            if (PlaybackStatus == PlaybackState.REWIND)
+                            {
+                                Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
+                            }
+                            else if (PlaybackStatus == PlaybackState.PLAYING)
+                            {
+                                Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
+                            }
                             break;
                         case LoopState.PINGPONG:
                             PlaybackStatus = PlaybackState.PLAYING;
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(0), 4));
+                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             break;
                     }
                 }
@@ -147,6 +155,20 @@ namespace MetalComposer
                 Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x0A, BitConverter.GetBytes((ushort)0x01));
             }
 
+        }
+
+        public static void SetLoops(ushort start, ushort end)
+        {
+            if (customLoop)
+            {
+                LoopStart = start;
+                LoopEnd = end;
+            }
+            else
+            {
+                LoopStart = 0;
+                LoopEnd = MaxFrames;
+            }
         }
 
     }

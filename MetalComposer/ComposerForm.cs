@@ -17,25 +17,60 @@ namespace MetalComposer
             cbLoopMode.SelectedIndex = 1;
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
+
         public void UpdateMaxFrames(ushort frames)
         {
             if (tbCurrentFrame.Value > frames)
             {
                 tbCurrentFrame.Value = frames - 1;
             }
+            else if (tbCurrentFrame.Value < 0)
+            {
+                tbCurrentFrame.Value = 0;
+            }
+
+            if (nudEnd.Value > frames)
+            {
+                nudEnd.Value = frames;
+            }
+
+            if (nudEnd.Value < nudStart.Value)
+            {
+                nudEnd.Value = nudStart.Value;
+            }
+
+            if (nudStart.Value > frames)
+            {
+                nudStart.Value = 0;
+            }
+
             tbCurrentFrame.Maximum = frames;
+            nudEnd.Maximum = frames;
+            nudStart.Maximum = nudEnd.Value;
         }
 
         public void UpdateFramesTimer(int timer)
         {
             lbCurrentFrame.Text = timer.ToString();
-            tbCurrentFrame.Value = timer;
+            if (timer <= tbCurrentFrame.Maximum)
+            {
+                tbCurrentFrame.Value = timer;
+            }
+            else
+            {
+                tbCurrentFrame.Value = 0;
+            }
+            
         }
 
         public void UpdateCoreAddressText(long address)
         {
-            label1.Text = "Core Address is: 0x" + address.ToString("X") + ", A: " + ADataAddress.ToString("X") + "\n Animation timer is: "
-                + AnimationTimer + "\nPlayback status: " + PlaybackStatus.ToString();
+            label1.Text = "Playback status: " + PlaybackStatus.ToString();
         }
 
         public void HandlePlaybackChange(PlaybackState oldState, PlaybackState newState)
@@ -147,7 +182,32 @@ namespace MetalComposer
             if (!((CheckBox)sender).Checked)
             {
                 SetAnimOverride(true);
+                PlaybackStatus = PlaybackState.PLAYING;
             }
+        }
+
+        private void cbCustomLoop_CheckedChanged(object sender, EventArgs e)
+        {
+            customLoop = ((CheckBox)sender).Checked;
+            nudEnd.Enabled = ((CheckBox)sender).Checked;
+            nudStart.Enabled = ((CheckBox)sender).Checked;
+            SetLoops((ushort)nudStart.Value, (ushort)nudEnd.Value);
+        }
+
+        private void nudStart_ValueChanged(object sender, EventArgs e)
+        {
+            SetLoops((ushort)nudStart.Value, (ushort)nudEnd.Value);
+        }
+
+        private void nudEnd_ValueChanged(object sender, EventArgs e)
+        {
+            SetLoops((ushort)nudStart.Value, (ushort)nudEnd.Value);
+        }
+
+        private void tsmiAbout_Click(object sender, EventArgs e)
+        {
+            AboutForm abt = new AboutForm();
+            abt.ShowDialog(this);
         }
     }
 }

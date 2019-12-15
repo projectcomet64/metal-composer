@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComposerForm));
             this.label1 = new System.Windows.Forms.Label();
             this.cbOverride = new System.Windows.Forms.CheckBox();
             this.tbCurrentFrame = new System.Windows.Forms.TrackBar();
@@ -50,6 +51,9 @@
             this.nudEnd = new System.Windows.Forms.NumericUpDown();
             this.lbLoopMode = new System.Windows.Forms.Label();
             this.gbPlayback = new System.Windows.Forms.GroupBox();
+            this.msMain = new System.Windows.Forms.MenuStrip();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbCustomLoop = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
@@ -57,23 +61,22 @@
             this.cbLoop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEnd)).BeginInit();
             this.gbPlayback.SuspendLayout();
+            this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.Size = new System.Drawing.Size(97, 43);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Current animation:";
+            this.label1.Text = "Playback status:";
             // 
             // cbOverride
             // 
-            this.cbOverride.AutoSize = true;
-            this.cbOverride.Location = new System.Drawing.Point(6, 71);
+            this.cbOverride.Location = new System.Drawing.Point(6, 62);
             this.cbOverride.Name = "cbOverride";
-            this.cbOverride.Size = new System.Drawing.Size(146, 17);
+            this.cbOverride.Size = new System.Drawing.Size(99, 32);
             this.cbOverride.TabIndex = 1;
             this.cbOverride.Text = "Override Game Animation";
             this.cbOverride.UseVisualStyleBackColor = true;
@@ -197,16 +200,16 @@
             // 
             this.cbLoopMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoopMode.FormattingEnabled = true;
-            this.cbLoopMode.Location = new System.Drawing.Point(71, 20);
+            this.cbLoopMode.Location = new System.Drawing.Point(84, 19);
             this.cbLoopMode.Name = "cbLoopMode";
-            this.cbLoopMode.Size = new System.Drawing.Size(72, 21);
+            this.cbLoopMode.Size = new System.Drawing.Size(146, 21);
             this.cbLoopMode.TabIndex = 13;
             this.cbLoopMode.SelectedIndexChanged += new System.EventHandler(this.cbLoopMode_SelectedIndexChanged);
             // 
             // lbFStart
             // 
             this.lbFStart.AutoSize = true;
-            this.lbFStart.Location = new System.Drawing.Point(9, 49);
+            this.lbFStart.Location = new System.Drawing.Point(96, 48);
             this.lbFStart.Name = "lbFStart";
             this.lbFStart.Size = new System.Drawing.Size(56, 13);
             this.lbFStart.TabIndex = 14;
@@ -215,7 +218,7 @@
             // lbFEnd
             // 
             this.lbFEnd.AutoSize = true;
-            this.lbFEnd.Location = new System.Drawing.Point(9, 75);
+            this.lbFEnd.Location = new System.Drawing.Point(96, 74);
             this.lbFEnd.Name = "lbFEnd";
             this.lbFEnd.Size = new System.Drawing.Size(53, 13);
             this.lbFEnd.TabIndex = 15;
@@ -223,48 +226,53 @@
             // 
             // nudStart
             // 
-            this.nudStart.Location = new System.Drawing.Point(71, 47);
+            this.nudStart.Enabled = false;
+            this.nudStart.Location = new System.Drawing.Point(158, 46);
             this.nudStart.Name = "nudStart";
             this.nudStart.Size = new System.Drawing.Size(72, 20);
             this.nudStart.TabIndex = 16;
+            this.nudStart.ValueChanged += new System.EventHandler(this.nudStart_ValueChanged);
             // 
             // gbInfo
             // 
             this.gbInfo.Controls.Add(this.label1);
             this.gbInfo.Controls.Add(this.cbOverride);
-            this.gbInfo.Location = new System.Drawing.Point(12, 12);
+            this.gbInfo.Location = new System.Drawing.Point(12, 27);
             this.gbInfo.Name = "gbInfo";
-            this.gbInfo.Size = new System.Drawing.Size(200, 100);
+            this.gbInfo.Size = new System.Drawing.Size(109, 100);
             this.gbInfo.TabIndex = 17;
             this.gbInfo.TabStop = false;
             this.gbInfo.Text = "Information";
             // 
             // cbLoop
             // 
+            this.cbLoop.Controls.Add(this.cbCustomLoop);
             this.cbLoop.Controls.Add(this.lbLoopMode);
             this.cbLoop.Controls.Add(this.nudEnd);
             this.cbLoop.Controls.Add(this.lbFStart);
             this.cbLoop.Controls.Add(this.lbFEnd);
             this.cbLoop.Controls.Add(this.nudStart);
             this.cbLoop.Controls.Add(this.cbLoopMode);
-            this.cbLoop.Location = new System.Drawing.Point(218, 12);
+            this.cbLoop.Location = new System.Drawing.Point(127, 27);
             this.cbLoop.Name = "cbLoop";
-            this.cbLoop.Size = new System.Drawing.Size(154, 100);
+            this.cbLoop.Size = new System.Drawing.Size(239, 100);
             this.cbLoop.TabIndex = 18;
             this.cbLoop.TabStop = false;
             this.cbLoop.Text = "Loop Controls";
             // 
             // nudEnd
             // 
-            this.nudEnd.Location = new System.Drawing.Point(71, 73);
+            this.nudEnd.Enabled = false;
+            this.nudEnd.Location = new System.Drawing.Point(158, 72);
             this.nudEnd.Name = "nudEnd";
             this.nudEnd.Size = new System.Drawing.Size(72, 20);
             this.nudEnd.TabIndex = 17;
+            this.nudEnd.ValueChanged += new System.EventHandler(this.nudEnd_ValueChanged);
             // 
             // lbLoopMode
             // 
             this.lbLoopMode.AutoSize = true;
-            this.lbLoopMode.Location = new System.Drawing.Point(9, 23);
+            this.lbLoopMode.Location = new System.Drawing.Point(17, 22);
             this.lbLoopMode.Name = "lbLoopMode";
             this.lbLoopMode.Size = new System.Drawing.Size(61, 13);
             this.lbLoopMode.TabIndex = 18;
@@ -283,34 +291,67 @@
             this.gbPlayback.Controls.Add(this.btnFrameNext);
             this.gbPlayback.Controls.Add(this.btnFrameLast);
             this.gbPlayback.Controls.Add(this.btnRwd);
-            this.gbPlayback.Location = new System.Drawing.Point(12, 118);
+            this.gbPlayback.Location = new System.Drawing.Point(12, 133);
             this.gbPlayback.Name = "gbPlayback";
-            this.gbPlayback.Size = new System.Drawing.Size(360, 146);
+            this.gbPlayback.Size = new System.Drawing.Size(354, 150);
             this.gbPlayback.TabIndex = 19;
             this.gbPlayback.TabStop = false;
             this.gbPlayback.Text = "Playback Controls";
+            // 
+            // msMain
+            // 
+            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAbout});
+            this.msMain.Location = new System.Drawing.Point(0, 0);
+            this.msMain.Name = "msMain";
+            this.msMain.Size = new System.Drawing.Size(378, 24);
+            this.msMain.TabIndex = 20;
+            this.msMain.Text = "menuStrip1";
+            // 
+            // tsmiAbout
+            // 
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Size = new System.Drawing.Size(52, 20);
+            this.tsmiAbout.Text = "About";
+            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            // 
+            // cbCustomLoop
+            // 
+            this.cbCustomLoop.Location = new System.Drawing.Point(22, 50);
+            this.cbCustomLoop.Name = "cbCustomLoop";
+            this.cbCustomLoop.Size = new System.Drawing.Size(68, 35);
+            this.cbCustomLoop.TabIndex = 13;
+            this.cbCustomLoop.Text = "Custom Loop";
+            this.cbCustomLoop.UseVisualStyleBackColor = true;
+            this.cbCustomLoop.CheckedChanged += new System.EventHandler(this.cbCustomLoop_CheckedChanged);
             // 
             // ComposerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 273);
+            this.ClientSize = new System.Drawing.Size(378, 295);
             this.Controls.Add(this.gbPlayback);
             this.Controls.Add(this.cbLoop);
             this.Controls.Add(this.gbInfo);
+            this.Controls.Add(this.msMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.msMain;
+            this.MaximizeBox = false;
             this.Name = "ComposerForm";
             this.Text = "METAL Composer";
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).EndInit();
             this.gbInfo.ResumeLayout(false);
-            this.gbInfo.PerformLayout();
             this.cbLoop.ResumeLayout(false);
             this.cbLoop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEnd)).EndInit();
             this.gbPlayback.ResumeLayout(false);
             this.gbPlayback.PerformLayout();
+            this.msMain.ResumeLayout(false);
+            this.msMain.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -338,5 +379,8 @@
         private System.Windows.Forms.Label lbLoopMode;
         private System.Windows.Forms.NumericUpDown nudEnd;
         private System.Windows.Forms.GroupBox gbPlayback;
+        private System.Windows.Forms.MenuStrip msMain;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
+        private System.Windows.Forms.CheckBox cbCustomLoop;
     }
 }

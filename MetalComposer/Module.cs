@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using M64MM.Additions;
 using M64MM.Utils;
 using static MetalComposer.ComposerBase;
@@ -19,21 +16,25 @@ namespace MetalComposer
 
         public void Close(EventArgs e)
         {
+            OverrideAnimation = false;
             SetAnimOverride(true);
+            if (form != null)
+            {
+                form.Dispose();
+            }
         }
 
         public List<ToolCommand> GetCommands()
         {
             List<ToolCommand> retList = new List<ToolCommand>();
-            ToolCommand showForm = new ToolCommand("Show Composer Form");
-            showForm.Summoned += (a, b) => form.Show();
+            ToolCommand showForm = new ToolCommand("Open METAL Composer");
+            showForm.Summoned += (a, b) => ShowForm();
             retList.Add(showForm);
             return retList;
         }
 
         public void Initialize()
         {
-            form = new ComposerForm();
         }
 
         public void OnBaseAddressFound()
@@ -46,6 +47,19 @@ namespace MetalComposer
 
         }
 
+        public void ShowForm()
+        {
+            if (form == null || form.IsDisposed) form = new ComposerForm();
+
+            if (!form.Visible)
+            form.Show();
+
+            if (form.WindowState == System.Windows.Forms.FormWindowState.Minimized)
+            {
+                form.WindowState = System.Windows.Forms.FormWindowState.Normal;
+            }
+        }
+
         public void Reset()
         {
 
@@ -53,7 +67,7 @@ namespace MetalComposer
 
         public void Update()
         {
-            if (Core.CurrentLevelID > 3)
+            if (Core.CurrentLevelID > 3 && form != null && form.IsDisposed == false)
             {
                 form.UpdateCoreAddressText(CoreAddress);
                 if (OverrideAnimation)
@@ -61,9 +75,6 @@ namespace MetalComposer
                     SetAnimOverride(false);
                     switch (PlaybackStatus)
                     {
-                        case PlaybackState.PAUSED:
-                            //Do nothing. We still want to edit the thing
-                            break;
                         case PlaybackState.PLAYING:
                             AnimationTimer += (short)Speed;
                             break;
