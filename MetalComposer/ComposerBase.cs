@@ -82,7 +82,14 @@ namespace MetalComposer
                             Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
                         case LoopState.FORWARD:
-                            Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(((ushort)value - LoopEnd + LoopStart)), 4));
+                            if (customLoop)
+                            {
+                                Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes((LoopStart)), 4));
+                            }
+                            else
+                            {
+                                Core.WriteBytes(Core.BaseAddress + CoreAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(((ushort)value - LoopEnd)), 4));
+                            }
                             break;
                         case LoopState.PINGPONG:
                             PlaybackStatus = PlaybackState.REWIND;
