@@ -44,22 +44,22 @@ namespace MetalComposer
         public static ushort LoopEnd = MaxFrames;
         public static int Speed = 1;
 
-        public static long CoreAddress
+        public static uint CoreAddress
         {
             get
             {
                 return BitConverter.ToUInt32(
-                  Core.ReadBytes(Core.BaseAddress + 0x33B1F8, 4), 0) - 0x80000000;
+                  Core.ReadBytes(Core.BaseAddress + 0x33B1F8, 4), 0) & 0x00FFFFFF;
             }
             private set { }
         }
 
-        public static long ADataAddress
+        public static uint ADataAddress
         {
             get
             {
                 return BitConverter.ToUInt32(
-    Core.ReadBytes(Core.BaseAddress + CoreAddress + 0x3C, 4), 0) - 0x80000000;
+    Core.ReadBytes(Core.BaseAddress + CoreAddress + 0x3C, 4), 0) & 0x00FFFFFF;
             }
             private set { }
         }

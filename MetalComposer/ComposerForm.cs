@@ -56,13 +56,13 @@ namespace MetalComposer
         public void UpdateFramesTimer(int timer)
         {
             lbCurrentFrame.Text = timer.ToString();
-            if (timer <= tbCurrentFrame.Maximum)
-            {
-                tbCurrentFrame.Value = timer;
-            }
-            else if (timer < 0)
+            if (timer < 0)
             {
                 tbCurrentFrame.Value = 0;
+            }
+            else if (timer <= tbCurrentFrame.Maximum)
+            {
+                tbCurrentFrame.Value = timer;
             }
             
         }
