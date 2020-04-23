@@ -208,5 +208,11 @@ namespace MetalComposer
             AboutForm abt = new AboutForm();
             abt.ShowDialog(this);
         }
+
+        private void cbSpasm_CheckedChanged(object sender, EventArgs e)
+        {
+            SpasmAnimation = ((CheckBox)sender).Checked;
+            tbCurrentFrame.Enabled = !((CheckBox)sender).Checked;
+        }
     }
 }

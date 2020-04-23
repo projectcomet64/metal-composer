@@ -54,6 +54,7 @@
             this.gbPlayback = new System.Windows.Forms.GroupBox();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbSpasm = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
@@ -74,7 +75,7 @@
             // 
             // cbOverride
             // 
-            this.cbOverride.Location = new System.Drawing.Point(6, 62);
+            this.cbOverride.Location = new System.Drawing.Point(6, 55);
             this.cbOverride.Name = "cbOverride";
             this.cbOverride.Size = new System.Drawing.Size(99, 32);
             this.cbOverride.TabIndex = 1;
@@ -84,7 +85,7 @@
             // 
             // tbCurrentFrame
             // 
-            this.tbCurrentFrame.Location = new System.Drawing.Point(6, 19);
+            this.tbCurrentFrame.Location = new System.Drawing.Point(7, 45);
             this.tbCurrentFrame.Maximum = 32;
             this.tbCurrentFrame.Name = "tbCurrentFrame";
             this.tbCurrentFrame.Size = new System.Drawing.Size(339, 45);
@@ -94,7 +95,7 @@
             // lbCurrentFrame
             // 
             this.lbCurrentFrame.AutoSize = true;
-            this.lbCurrentFrame.Location = new System.Drawing.Point(170, 75);
+            this.lbCurrentFrame.Location = new System.Drawing.Point(171, 101);
             this.lbCurrentFrame.Name = "lbCurrentFrame";
             this.lbCurrentFrame.Size = new System.Drawing.Size(13, 13);
             this.lbCurrentFrame.TabIndex = 3;
@@ -104,7 +105,7 @@
             // btnFrameBack
             // 
             this.btnFrameBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameBack.Location = new System.Drawing.Point(52, 70);
+            this.btnFrameBack.Location = new System.Drawing.Point(53, 96);
             this.btnFrameBack.Name = "btnFrameBack";
             this.btnFrameBack.Size = new System.Drawing.Size(39, 23);
             this.btnFrameBack.TabIndex = 4;
@@ -115,7 +116,7 @@
             // btnFrameStart
             // 
             this.btnFrameStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameStart.Location = new System.Drawing.Point(6, 70);
+            this.btnFrameStart.Location = new System.Drawing.Point(7, 96);
             this.btnFrameStart.Name = "btnFrameStart";
             this.btnFrameStart.Size = new System.Drawing.Size(40, 23);
             this.btnFrameStart.TabIndex = 5;
@@ -126,7 +127,7 @@
             // btnFrameNext
             // 
             this.btnFrameNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameNext.Location = new System.Drawing.Point(261, 70);
+            this.btnFrameNext.Location = new System.Drawing.Point(262, 96);
             this.btnFrameNext.Name = "btnFrameNext";
             this.btnFrameNext.Size = new System.Drawing.Size(39, 23);
             this.btnFrameNext.TabIndex = 6;
@@ -137,7 +138,7 @@
             // btnFrameLast
             // 
             this.btnFrameLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameLast.Location = new System.Drawing.Point(306, 70);
+            this.btnFrameLast.Location = new System.Drawing.Point(307, 96);
             this.btnFrameLast.Name = "btnFrameLast";
             this.btnFrameLast.Size = new System.Drawing.Size(39, 23);
             this.btnFrameLast.TabIndex = 7;
@@ -148,7 +149,7 @@
             // btnPlay
             // 
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlay.Location = new System.Drawing.Point(216, 70);
+            this.btnPlay.Location = new System.Drawing.Point(217, 96);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(39, 23);
             this.btnPlay.TabIndex = 4;
@@ -159,7 +160,7 @@
             // btnRwd
             // 
             this.btnRwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRwd.Location = new System.Drawing.Point(97, 70);
+            this.btnRwd.Location = new System.Drawing.Point(98, 96);
             this.btnRwd.Name = "btnRwd";
             this.btnRwd.Size = new System.Drawing.Size(39, 23);
             this.btnRwd.TabIndex = 6;
@@ -170,7 +171,7 @@
             // lbSpeed
             // 
             this.lbSpeed.AutoSize = true;
-            this.lbSpeed.Location = new System.Drawing.Point(5, 107);
+            this.lbSpeed.Location = new System.Drawing.Point(6, 133);
             this.lbSpeed.Name = "lbSpeed";
             this.lbSpeed.Size = new System.Drawing.Size(41, 13);
             this.lbSpeed.TabIndex = 10;
@@ -178,7 +179,7 @@
             // 
             // tbSpeed
             // 
-            this.tbSpeed.Location = new System.Drawing.Point(52, 103);
+            this.tbSpeed.Location = new System.Drawing.Point(53, 129);
             this.tbSpeed.Minimum = 1;
             this.tbSpeed.Name = "tbSpeed";
             this.tbSpeed.Size = new System.Drawing.Size(248, 45);
@@ -189,7 +190,7 @@
             // lbSpeedVal
             // 
             this.lbSpeedVal.AutoSize = true;
-            this.lbSpeedVal.Location = new System.Drawing.Point(306, 107);
+            this.lbSpeedVal.Location = new System.Drawing.Point(307, 133);
             this.lbSpeedVal.Name = "lbSpeedVal";
             this.lbSpeedVal.Size = new System.Drawing.Size(18, 13);
             this.lbSpeedVal.TabIndex = 12;
@@ -290,6 +291,7 @@
             // 
             // gbPlayback
             // 
+            this.gbPlayback.Controls.Add(this.cbSpasm);
             this.gbPlayback.Controls.Add(this.tbCurrentFrame);
             this.gbPlayback.Controls.Add(this.lbCurrentFrame);
             this.gbPlayback.Controls.Add(this.btnFrameBack);
@@ -303,7 +305,7 @@
             this.gbPlayback.Controls.Add(this.btnRwd);
             this.gbPlayback.Location = new System.Drawing.Point(12, 133);
             this.gbPlayback.Name = "gbPlayback";
-            this.gbPlayback.Size = new System.Drawing.Size(354, 150);
+            this.gbPlayback.Size = new System.Drawing.Size(354, 181);
             this.gbPlayback.TabIndex = 19;
             this.gbPlayback.TabStop = false;
             this.gbPlayback.Text = "Playback Controls";
@@ -325,11 +327,22 @@
             this.tsmiAbout.Text = "About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
+            // cbSpasm
+            // 
+            this.cbSpasm.AutoSize = true;
+            this.cbSpasm.Location = new System.Drawing.Point(137, 22);
+            this.cbSpasm.Name = "cbSpasm";
+            this.cbSpasm.Size = new System.Drawing.Size(63, 17);
+            this.cbSpasm.TabIndex = 13;
+            this.cbSpasm.Text = "SPASM";
+            this.cbSpasm.UseVisualStyleBackColor = true;
+            this.cbSpasm.CheckedChanged += new System.EventHandler(this.cbSpasm_CheckedChanged);
+            // 
             // ComposerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 295);
+            this.ClientSize = new System.Drawing.Size(378, 326);
             this.Controls.Add(this.gbPlayback);
             this.Controls.Add(this.cbLoop);
             this.Controls.Add(this.gbInfo);
@@ -382,5 +395,6 @@
         private System.Windows.Forms.MenuStrip msMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.CheckBox cbCustomLoop;
+        private System.Windows.Forms.CheckBox cbSpasm;
     }
 }

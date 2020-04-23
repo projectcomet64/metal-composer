@@ -15,7 +15,9 @@ namespace MetalComposer
         public static LoopState LoopStatus = LoopState.FORWARD;
         private static PlaybackState _playback = PlaybackState.PLAYING;
         public static bool OverrideAnimation;
+        public static bool SpasmAnimation;
         public static bool customLoop;
+        public static Random RNG = new Random();
 
         public static PlaybackState PlaybackStatus
         {
@@ -155,6 +157,15 @@ namespace MetalComposer
                 Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x02, BitConverter.GetBytes((ushort)0x00));
             }
             
+        }
+
+        public static void SetAnimSpasm()
+        {
+            byte[] AnimMetaBytes = Core.ReadBytes(Core.BaseAddress + ADataAddress + 0xC, 4);
+            //AnimMetaBytes = Core.SwapEndian(AnimMetaBytes, 4);
+            AnimMetaBytes[0] = (byte)(0x40 + (RNG.Next(10) * 2));
+            AnimMetaBytes[1] = 0;
+            Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x10, AnimMetaBytes);
         }
 
         public static void NormalizeWingCapHeight(bool restore)

@@ -84,6 +84,11 @@ namespace MetalComposer
                     }
 
                 }
+                if (SpasmAnimation)
+                {
+                    SetAnimSpasm();
+                    AnimationTimer = (short)RNG.Next(0, MaxFrames);
+                }
                 form.UpdateMaxFrames(MaxFrames);
                 form.UpdateFramesTimer(AnimationTimer);
             }
