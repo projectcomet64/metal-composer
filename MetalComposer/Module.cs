@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using M64MM.Additions;
 using M64MM.Utils;
 using static MetalComposer.ComposerBase;
@@ -52,11 +53,11 @@ namespace MetalComposer
             if (form == null || form.IsDisposed) form = new ComposerForm();
 
             if (!form.Visible)
-            form.Show();
+                form.Show();
 
-            if (form.WindowState == System.Windows.Forms.FormWindowState.Minimized)
+            if (form.WindowState == FormWindowState.Minimized)
             {
-                form.WindowState = System.Windows.Forms.FormWindowState.Normal;
+                form.WindowState = FormWindowState.Normal;
             }
         }
 
@@ -67,31 +68,47 @@ namespace MetalComposer
 
         public void Update()
         {
-            if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing))
+            form?.Invoke(new MethodInvoker(delegate ()
             {
-                form.UpdateCoreAddressText(CoreAddress);
-                if (OverrideAnimation)
+                if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing))
                 {
-                    SetAnimOverride(false);
-                    switch (PlaybackStatus)
+                    ValidateAnimDataAddr();
+                    if (ValidAnimData)
                     {
-                        case PlaybackState.PLAYING:
-                            AnimationTimer += (short)Speed;
-                            break;
-                        case PlaybackState.REWIND:
-                            AnimationTimer -= (short)Speed;
-                            break;
-                    }
+                        form.UpdateCoreAddressText(0);
+                        if (OverrideAnimation)
+                        {
+                            SetAnimOverride(false);
+                            switch (PlaybackStatus)
+                            {
+                                case PlaybackState.PLAYING:
+                                    AnimationTimer += (short)Speed;
+                                    break;
+                                case PlaybackState.REWIND:
+                                    AnimationTimer -= (short)Speed;
+                                    break;
+                            }
 
+                        }
+                        if (SpasmAnimation)
+                        {
+                            SetAnimSpasm();
+                            AnimationTimer = (short)RNG.Next(0, MaxFrames);
+                        }
+                        form.UpdateMaxFrames(MaxFrames);
+                        form.UpdateFramesTimer(AnimationTimer);
+                    }
+                    else
+                    {
+                        form.UpdateFramesTimer(0, true);
+                    }
                 }
-                if (SpasmAnimation)
-                {
-                    SetAnimSpasm();
-                    AnimationTimer = (short)RNG.Next(0, MaxFrames);
-                }
-                form.UpdateMaxFrames(MaxFrames);
-                form.UpdateFramesTimer(AnimationTimer);
-            }
+            }));
+        }
+
+        public void OnCoreEntAddressChange(uint addr)
+        {
+
         }
     }
 }

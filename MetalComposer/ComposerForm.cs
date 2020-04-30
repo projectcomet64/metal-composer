@@ -53,8 +53,13 @@ namespace MetalComposer
             nudStart.Maximum = nudEnd.Value;
         }
 
-        public void UpdateFramesTimer(int timer)
+        public void UpdateFramesTimer(int timer, bool wait = false)
         {
+            if (wait)
+            {
+                lbCurrentFrame.Text = "Wait...";
+                return;
+            }
             lbCurrentFrame.Text = timer.ToString();
             if (timer < 0)
             {
