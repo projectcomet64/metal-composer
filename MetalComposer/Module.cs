@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using M64MM.Additions;
 using M64MM.Utils;
+using MetalComposer.Properties;
 using static MetalComposer.ComposerBase;
 namespace MetalComposer
 {
@@ -14,6 +16,8 @@ namespace MetalComposer
         public string SafeName => "CoMposer";
 
         public string Description => "EXPERIMENTAL FEATURE - Modify some aspects of Mario's animation!";
+
+        public Image AddonIcon => Resources.metal_512;
 
         public void Close(EventArgs e)
         {
