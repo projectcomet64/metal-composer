@@ -16,7 +16,6 @@ namespace MetalComposer
         public static bool OverrideAnimation;
         public static bool SpasmAnimation;
         public static bool customLoop;
-        public static bool ValidAnimData;
         public static Random RNG = new Random();
 
         public static PlaybackState PlaybackStatus
@@ -46,33 +45,15 @@ namespace MetalComposer
         public static ushort LoopEnd = MaxFrames;
         public static int Speed = 1;
 
-        public static uint ADataAddress
-        {
-            get
-            {
-                uint addr = BitConverter.ToUInt32(
-    Core.ReadBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x3C, 4), 0) & 0x00FFFFFF;
-                return addr;
-            }
-            private set { }
-        }
-
-        public static void ValidateAnimDataAddr()
-        {
-            uint a = ADataAddress;
-            ValidAnimData = (a > 0);
-        }
-
         public static short AnimationTimer
         {
             get
             {
-                return (short)BitConverter.ToUInt16(
-                    Core.ReadBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, sizeof(ushort)), 0);
+                return Core.AnimationTimer;
             }
             set
             {
-                if (!ValidAnimData)
+                if (!Core.ValidateAnimDataAddress())
                     return;
 
                 if (value > LoopEnd)
@@ -135,7 +116,7 @@ namespace MetalComposer
             get
             {
                 ushort _maxFrames = BitConverter.ToUInt16(
-    Core.ReadBytes(Core.BaseAddress + ADataAddress + 0xA, sizeof(ushort)), 0);
+    Core.ReadBytes(Core.BaseAddress + Core.AnimDataAddress + 0xA, sizeof(ushort)), 0);
                 if (!customLoop)
                 {
                     LoopStart = 0;
@@ -143,49 +124,48 @@ namespace MetalComposer
                 }
                 return _maxFrames;
             }
-            private set { }
         }
 
         public static void SetAnimOverride(bool restore)
         {
-            if (!ValidAnimData)
+            if (!Core.ValidateAnimDataAddress())
                 return;
 
             if (!restore)
             {
-                Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x02, BitConverter.GetBytes((ushort)0x04));
+                Core.WriteBytes(Core.BaseAddress + Core.AnimDataAddress + 0x02, BitConverter.GetBytes((ushort)0x04));
             }
             else
             {
-                Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x02, BitConverter.GetBytes((ushort)0x00));
+                Core.WriteBytes(Core.BaseAddress + Core.AnimDataAddress + 0x02, BitConverter.GetBytes((ushort)0x00));
             }
 
         }
 
         public static void SetAnimSpasm()
         {
-            if (!ValidAnimData)
+            if (!Core.ValidateAnimDataAddress())
                 return;
 
-            byte[] AnimMetaBytes = Core.ReadBytes(Core.BaseAddress + ADataAddress + 0xC, 4);
+            byte[] AnimMetaBytes = Core.ReadBytes(Core.BaseAddress + Core.AnimDataAddress + 0xC, 4);
             //AnimMetaBytes = Core.SwapEndian(AnimMetaBytes, 4);
             AnimMetaBytes[0] = (byte)(0x40 + (RNG.Next(10) * 2));
             AnimMetaBytes[1] = 0;
-            Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x10, AnimMetaBytes);
+            Core.WriteBytes(Core.BaseAddress + Core.AnimDataAddress + 0x10, AnimMetaBytes);
         }
 
         public static void NormalizeWingCapHeight(bool restore)
         {
-            if (!ValidAnimData)
+            if (!Core.ValidateAnimDataAddress())
                 return;
 
             if (!restore)
             {
-                Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x0A, BitConverter.GetBytes((ushort)0x00));
+                Core.WriteBytes(Core.BaseAddress + Core.AnimDataAddress + 0x0A, BitConverter.GetBytes((ushort)0x00));
             }
             else
             {
-                Core.WriteBytes(Core.BaseAddress + ADataAddress + 0x0A, BitConverter.GetBytes((ushort)0x01));
+                Core.WriteBytes(Core.BaseAddress + Core.AnimDataAddress + 0x0A, BitConverter.GetBytes((ushort)0x01));
             }
 
         }

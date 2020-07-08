@@ -76,8 +76,8 @@ namespace MetalComposer
             {
                 if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing))
                 {
-                    ValidateAnimDataAddr();
-                    if (ValidAnimData)
+                    Core.ValidateAnimDataAddress();
+                    if (Core.ValidateAnimDataAddress())
                     {
                         form.UpdateCoreAddressText(0);
                         if (OverrideAnimation)
