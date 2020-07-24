@@ -52,9 +52,9 @@
             this.lbLoopMode = new System.Windows.Forms.Label();
             this.nudEnd = new System.Windows.Forms.NumericUpDown();
             this.gbPlayback = new System.Windows.Forms.GroupBox();
+            this.cbSpasm = new System.Windows.Forms.CheckBox();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbSpasm = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
@@ -95,7 +95,7 @@
             // lbCurrentFrame
             // 
             this.lbCurrentFrame.AutoSize = true;
-            this.lbCurrentFrame.Location = new System.Drawing.Point(171, 101);
+            this.lbCurrentFrame.Location = new System.Drawing.Point(167, 29);
             this.lbCurrentFrame.Name = "lbCurrentFrame";
             this.lbCurrentFrame.Size = new System.Drawing.Size(13, 13);
             this.lbCurrentFrame.TabIndex = 3;
@@ -104,74 +104,80 @@
             // 
             // btnFrameBack
             // 
+            this.btnFrameBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFrameBack.BackgroundImage")));
+            this.btnFrameBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFrameBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFrameBack.Location = new System.Drawing.Point(53, 96);
             this.btnFrameBack.Name = "btnFrameBack";
-            this.btnFrameBack.Size = new System.Drawing.Size(39, 23);
+            this.btnFrameBack.Size = new System.Drawing.Size(32, 32);
             this.btnFrameBack.TabIndex = 4;
-            this.btnFrameBack.Text = "◀ 1";
             this.btnFrameBack.UseVisualStyleBackColor = true;
             this.btnFrameBack.Click += new System.EventHandler(this.btnFrameBack_Click);
             // 
             // btnFrameStart
             // 
+            this.btnFrameStart.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFrameStart.BackgroundImage")));
+            this.btnFrameStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFrameStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameStart.Location = new System.Drawing.Point(7, 96);
+            this.btnFrameStart.Location = new System.Drawing.Point(15, 96);
             this.btnFrameStart.Name = "btnFrameStart";
-            this.btnFrameStart.Size = new System.Drawing.Size(40, 23);
+            this.btnFrameStart.Size = new System.Drawing.Size(32, 32);
             this.btnFrameStart.TabIndex = 5;
-            this.btnFrameStart.Text = "|◀";
             this.btnFrameStart.UseVisualStyleBackColor = true;
             this.btnFrameStart.Click += new System.EventHandler(this.btnFrameStart_Click);
             // 
             // btnFrameNext
             // 
+            this.btnFrameNext.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFrameNext.BackgroundImage")));
+            this.btnFrameNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFrameNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameNext.Location = new System.Drawing.Point(262, 96);
+            this.btnFrameNext.Location = new System.Drawing.Point(167, 96);
             this.btnFrameNext.Name = "btnFrameNext";
-            this.btnFrameNext.Size = new System.Drawing.Size(39, 23);
+            this.btnFrameNext.Size = new System.Drawing.Size(32, 32);
             this.btnFrameNext.TabIndex = 6;
-            this.btnFrameNext.Text = "1 ▶";
             this.btnFrameNext.UseVisualStyleBackColor = true;
             this.btnFrameNext.Click += new System.EventHandler(this.btnFrameNext_Click);
             // 
             // btnFrameLast
             // 
+            this.btnFrameLast.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFrameLast.BackgroundImage")));
+            this.btnFrameLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFrameLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFrameLast.Location = new System.Drawing.Point(307, 96);
+            this.btnFrameLast.Location = new System.Drawing.Point(205, 96);
             this.btnFrameLast.Name = "btnFrameLast";
-            this.btnFrameLast.Size = new System.Drawing.Size(39, 23);
+            this.btnFrameLast.Size = new System.Drawing.Size(32, 32);
             this.btnFrameLast.TabIndex = 7;
-            this.btnFrameLast.Text = "▶|";
             this.btnFrameLast.UseVisualStyleBackColor = true;
             this.btnFrameLast.Click += new System.EventHandler(this.btnFrameLast_Click);
             // 
             // btnPlay
             // 
+            this.btnPlay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPlay.BackgroundImage")));
+            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlay.Location = new System.Drawing.Point(217, 96);
+            this.btnPlay.Location = new System.Drawing.Point(91, 96);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(39, 23);
+            this.btnPlay.Size = new System.Drawing.Size(32, 32);
             this.btnPlay.TabIndex = 4;
-            this.btnPlay.Text = "❚❚";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnRwd
             // 
+            this.btnRwd.BackgroundImage = global::MetalComposer.Properties.Resources.SWAP;
+            this.btnRwd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRwd.Location = new System.Drawing.Point(98, 96);
+            this.btnRwd.Location = new System.Drawing.Point(129, 96);
             this.btnRwd.Name = "btnRwd";
-            this.btnRwd.Size = new System.Drawing.Size(39, 23);
+            this.btnRwd.Size = new System.Drawing.Size(32, 32);
             this.btnRwd.TabIndex = 6;
-            this.btnRwd.Text = "◀◀";
             this.btnRwd.UseVisualStyleBackColor = true;
             this.btnRwd.Click += new System.EventHandler(this.btnRwd_Click);
             // 
             // lbSpeed
             // 
             this.lbSpeed.AutoSize = true;
-            this.lbSpeed.Location = new System.Drawing.Point(6, 133);
+            this.lbSpeed.Location = new System.Drawing.Point(6, 144);
             this.lbSpeed.Name = "lbSpeed";
             this.lbSpeed.Size = new System.Drawing.Size(41, 13);
             this.lbSpeed.TabIndex = 10;
@@ -179,18 +185,19 @@
             // 
             // tbSpeed
             // 
-            this.tbSpeed.Location = new System.Drawing.Point(53, 129);
-            this.tbSpeed.Minimum = 1;
+            this.tbSpeed.Location = new System.Drawing.Point(53, 140);
+            this.tbSpeed.Minimum = -10;
             this.tbSpeed.Name = "tbSpeed";
-            this.tbSpeed.Size = new System.Drawing.Size(248, 45);
+            this.tbSpeed.Size = new System.Drawing.Size(268, 45);
             this.tbSpeed.TabIndex = 11;
             this.tbSpeed.Value = 1;
             this.tbSpeed.Scroll += new System.EventHandler(this.tbSpeed_Scroll);
+            this.tbSpeed.ValueChanged += new System.EventHandler(this.tbSpeed_ValueChanged);
             // 
             // lbSpeedVal
             // 
             this.lbSpeedVal.AutoSize = true;
-            this.lbSpeedVal.Location = new System.Drawing.Point(307, 133);
+            this.lbSpeedVal.Location = new System.Drawing.Point(327, 144);
             this.lbSpeedVal.Name = "lbSpeedVal";
             this.lbSpeedVal.Size = new System.Drawing.Size(18, 13);
             this.lbSpeedVal.TabIndex = 12;
@@ -305,10 +312,21 @@
             this.gbPlayback.Controls.Add(this.btnRwd);
             this.gbPlayback.Location = new System.Drawing.Point(12, 133);
             this.gbPlayback.Name = "gbPlayback";
-            this.gbPlayback.Size = new System.Drawing.Size(354, 181);
+            this.gbPlayback.Size = new System.Drawing.Size(354, 190);
             this.gbPlayback.TabIndex = 19;
             this.gbPlayback.TabStop = false;
             this.gbPlayback.Text = "Playback Controls";
+            // 
+            // cbSpasm
+            // 
+            this.cbSpasm.AutoSize = true;
+            this.cbSpasm.Location = new System.Drawing.Point(258, 105);
+            this.cbSpasm.Name = "cbSpasm";
+            this.cbSpasm.Size = new System.Drawing.Size(63, 17);
+            this.cbSpasm.TabIndex = 13;
+            this.cbSpasm.Text = "SPASM";
+            this.cbSpasm.UseVisualStyleBackColor = true;
+            this.cbSpasm.CheckedChanged += new System.EventHandler(this.cbSpasm_CheckedChanged);
             // 
             // msMain
             // 
@@ -327,22 +345,11 @@
             this.tsmiAbout.Text = "About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
-            // cbSpasm
-            // 
-            this.cbSpasm.AutoSize = true;
-            this.cbSpasm.Location = new System.Drawing.Point(137, 22);
-            this.cbSpasm.Name = "cbSpasm";
-            this.cbSpasm.Size = new System.Drawing.Size(63, 17);
-            this.cbSpasm.TabIndex = 13;
-            this.cbSpasm.Text = "SPASM";
-            this.cbSpasm.UseVisualStyleBackColor = true;
-            this.cbSpasm.CheckedChanged += new System.EventHandler(this.cbSpasm_CheckedChanged);
-            // 
             // ComposerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 326);
+            this.ClientSize = new System.Drawing.Size(378, 335);
             this.Controls.Add(this.gbPlayback);
             this.Controls.Add(this.cbLoop);
             this.Controls.Add(this.gbInfo);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetalComposer.Properties;
+using System;
 using System.Windows.Forms;
 using static MetalComposer.ComposerBase;
 
@@ -85,16 +86,16 @@ namespace MetalComposer
                     switch (newState)
                     {
                         case PlaybackState.PAUSED:
-                            btnPlay.Text = "▶";
-                            btnRwd.Text = "◀◀";
+                            btnPlay.BackgroundImage = Resources.PLAY;
+                            btnRwd.BackgroundImage = Resources.RWD;
                             break;
                         case PlaybackState.PLAYING:
-                            btnPlay.Text = "❚❚";
-                            btnRwd.Text = "◀◀";
+                            btnPlay.BackgroundImage = Resources.PAUSE;
+                            btnRwd.BackgroundImage = Resources.SWAP;
                             break;
                         case PlaybackState.REWIND:
-                            btnRwd.Text = "❚❚";
-                            btnPlay.Text = "▶";
+                            btnRwd.BackgroundImage = Resources.SWAP;
+                            btnPlay.BackgroundImage = Resources.PAUSE;
                             break;
                     }
                     break;
@@ -105,12 +106,12 @@ namespace MetalComposer
                             PlaybackStatus = PlaybackState.PAUSED;
                             break;
                         case PlaybackState.PAUSED:
-                            btnPlay.Text = "▶";
-                            btnRwd.Text = "◀◀";
+                            btnPlay.BackgroundImage = Resources.PLAY;
+                            btnRwd.BackgroundImage = Resources.RWD;
                             break;
                         case PlaybackState.REWIND:
-                            btnRwd.Text = "❚❚";
-                            btnPlay.Text = "▶";
+                            btnRwd.BackgroundImage = Resources.SWAP;
+                            btnPlay.BackgroundImage = Resources.PLAY;
                             break;
                     }
                     break;
@@ -121,12 +122,11 @@ namespace MetalComposer
                             PlaybackStatus = PlaybackState.PAUSED;
                             break;
                         case PlaybackState.PAUSED:
-                            btnPlay.Text = "▶";
-                            btnRwd.Text = "◀◀";
+                            btnPlay.BackgroundImage = Resources.PLAY;
+                            btnRwd.BackgroundImage = Resources.RWD;
                             break;
                         case PlaybackState.PLAYING:
-                            btnPlay.Text = "❚❚";
-                            btnRwd.Text = "◀◀";
+                            btnPlay.BackgroundImage = Resources.PAUSE;
                             break;
                     }
                     break;
@@ -137,11 +137,18 @@ namespace MetalComposer
         private void btnPlay_Click(object sender, EventArgs e)
         {
             PlaybackStatus = PlaybackState.PLAYING;
+            if (tbSpeed.Value == 0)
+            {
+                tbSpeed.Value = 1;
+            }
         }
 
         private void btnRwd_Click(object sender, EventArgs e)
         {
-            PlaybackStatus = PlaybackState.REWIND;
+            if (PlaybackStatus == PlaybackState.PAUSED)
+                tbSpeed.Value = -1;
+            else
+                tbSpeed.Value *= -1;
         }
 
         private void cbLoopMode_SelectedIndexChanged(object sender, EventArgs e)
@@ -149,10 +156,11 @@ namespace MetalComposer
             LoopStatus = (LoopState)((ComboBox)sender).SelectedIndex;
         }
 
+        // TODO: Remove
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            Speed = tbSpeed.Value;
-            lbSpeedVal.Text = Speed + "x";
+            //Speed = tbSpeed.Value;
+            //lbSpeedVal.Text = Speed + "x";
         }
 
         private void btnFrameNext_Click(object sender, EventArgs e)
@@ -218,6 +226,41 @@ namespace MetalComposer
         {
             SpasmAnimation = ((CheckBox)sender).Checked;
             tbCurrentFrame.Enabled = !((CheckBox)sender).Checked;
+        }
+
+        private void tbSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            //TODO: Find a way to make this cleaner...
+
+            if (PlaybackStatus == PlaybackState.PAUSED)
+            {
+                if (((TrackBar)sender).Value > 0)
+                {
+                    PlaybackStatus = PlaybackState.PLAYING;
+                }
+                else
+                {
+                        PlaybackStatus = PlaybackState.REWIND;
+                }
+            }
+            else
+            {
+                if (((TrackBar)sender).Value == 0)
+                {
+                    PlaybackStatus = PlaybackState.PAUSED;
+                }
+                else if (((TrackBar)sender).Value < 0 && PlaybackStatus != PlaybackState.REWIND)
+                {
+                    PlaybackStatus = PlaybackState.REWIND;
+                }
+                else if (((TrackBar)sender).Value > 0 && PlaybackStatus != PlaybackState.PLAYING)
+                {
+                    PlaybackStatus = PlaybackState.PLAYING;
+                }
+            }
+
+            Speed = Math.Abs(tbSpeed.Value);
+            lbSpeedVal.Text = Speed + "x";
         }
     }
 }

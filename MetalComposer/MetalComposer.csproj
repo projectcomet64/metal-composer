@@ -91,5 +91,32 @@
   <ItemGroup>
     <None Include="Resources\metal_512.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ST_RWD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\END.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FWD1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PAUSE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PLAY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RWD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RWD1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\START.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SWAP.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
