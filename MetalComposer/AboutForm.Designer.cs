@@ -43,7 +43,7 @@
             // 
             // pbLogo
             // 
-            this.pbLogo.Image = global::MetalComposer.Properties.Resources.metal_512;
+            this.pbLogo.Image = global::MetalComposer.Properties.Resources.composer_512;
             this.pbLogo.Location = new System.Drawing.Point(12, 12);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(64, 64);
@@ -75,9 +75,9 @@
             this.lbAuthor.AutoSize = true;
             this.lbAuthor.Location = new System.Drawing.Point(12, 79);
             this.lbAuthor.Name = "lbAuthor";
-            this.lbAuthor.Size = new System.Drawing.Size(263, 13);
+            this.lbAuthor.Size = new System.Drawing.Size(172, 13);
             this.lbAuthor.TabIndex = 3;
-            this.lbAuthor.Text = "by GlitchyPSI, for M64MM3 Classic A1 (Project Comet)";
+            this.lbAuthor.Text = "by GlitchyPSI, for M64MM3 Classic";
             // 
             // lbDesc
             // 
@@ -113,9 +113,9 @@
             this.lbReckoning.AutoSize = true;
             this.lbReckoning.Location = new System.Drawing.Point(12, 195);
             this.lbReckoning.Name = "lbReckoning";
-            this.lbReckoning.Size = new System.Drawing.Size(126, 13);
+            this.lbReckoning.Size = new System.Drawing.Size(207, 13);
             this.lbReckoning.TabIndex = 7;
-            this.lbReckoning.Text = "This is just the beginning.";
+            this.lbReckoning.Text = "A single instrument does not make a band.";
             // 
             // btnOK
             // 
