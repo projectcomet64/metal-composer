@@ -13,11 +13,11 @@ namespace MetalComposer
 
         ComposerForm form;
 
-        public string SafeName => "CoMposer";
+        public string SafeName => "METAL Composer";
 
-        public string Description => "EXPERIMENTAL FEATURE - Modify some aspects of Mario's animation!";
+        public string Description => "Advanced SM64 Animation trainer";
 
-        public Image AddonIcon => Resources.metal_512;
+        public Image AddonIcon => Resources.composer_512;
 
         public void Close(EventArgs e)
         {

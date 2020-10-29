@@ -118,5 +118,8 @@
   <ItemGroup>
     <None Include="Resources\SWAP.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\composer_512.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
