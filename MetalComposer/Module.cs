@@ -83,16 +83,8 @@ namespace MetalComposer
                         if (OverrideAnimation)
                         {
                             SetAnimOverride(false);
-                            switch (PlaybackStatus)
-                            {
-                                case PlaybackState.PLAYING:
-                                    AnimationTimer += (short)Speed;
-                                    break;
-                                case PlaybackState.REWIND:
-                                    AnimationTimer -= (short)Speed;
-                                    break;
-                            }
-
+                            if (PlaybackStatus != PlaybackState.PAUSED)
+                            AnimationTimer += (short)Speed;
                         }
                         if (SpasmAnimation)
                         {

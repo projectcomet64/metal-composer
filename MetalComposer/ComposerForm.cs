@@ -70,7 +70,7 @@ namespace MetalComposer
             {
                 tbCurrentFrame.Value = timer;
             }
-            
+
         }
 
         public void UpdateCoreAddressText(long address)
@@ -115,52 +115,40 @@ namespace MetalComposer
                             break;
                     }
                     break;
-                case PlaybackState.REWIND:
-                    switch (newState)
-                    {
-                        case PlaybackState.REWIND:
-                            PlaybackStatus = PlaybackState.PAUSED;
-                            break;
-                        case PlaybackState.PAUSED:
-                            btnPlay.BackgroundImage = Resources.PLAY;
-                            btnRwd.BackgroundImage = Resources.RWD;
-                            break;
-                        case PlaybackState.PLAYING:
-                            btnPlay.BackgroundImage = Resources.PAUSE;
-                            break;
-                    }
-                    break;
             }
 
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            PlaybackStatus = PlaybackState.PLAYING;
             if (tbSpeed.Value == 0)
             {
                 tbSpeed.Value = 1;
             }
+            if (tbSpeed.Value < 0)
+            {
+                tbSpeed.Value *= -1;
+            }
+            PlaybackStatus = PlaybackState.PLAYING;
+
         }
 
         private void btnRwd_Click(object sender, EventArgs e)
         {
             if (PlaybackStatus == PlaybackState.PAUSED)
+            {
+                PlaybackStatus = PlaybackState.PLAYING;
                 tbSpeed.Value = -1;
+            }
             else
+            {
                 tbSpeed.Value *= -1;
+            }
         }
 
         private void cbLoopMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoopStatus = (LoopState)((ComboBox)sender).SelectedIndex;
-        }
-
-        // TODO: Remove
-        private void tbSpeed_Scroll(object sender, EventArgs e)
-        {
-            //Speed = tbSpeed.Value;
-            //lbSpeedVal.Text = Speed + "x";
         }
 
         private void btnFrameNext_Click(object sender, EventArgs e)
@@ -185,7 +173,7 @@ namespace MetalComposer
 
         private void tbCurrentFrame_Scroll(object sender, EventArgs e)
         {
-                AnimationTimer = (short)tbCurrentFrame.Value;
+            AnimationTimer = (short)tbCurrentFrame.Value;
         }
 
         private void cbOverride_CheckedChanged(object sender, EventArgs e)
@@ -230,17 +218,13 @@ namespace MetalComposer
 
         private void tbSpeed_ValueChanged(object sender, EventArgs e)
         {
-            //TODO: Find a way to make this cleaner...
+            //FIXME: Find a way to make this cleaner...
 
             if (PlaybackStatus == PlaybackState.PAUSED)
             {
-                if (((TrackBar)sender).Value > 0)
+                if (((TrackBar)sender).Value != 0)
                 {
                     PlaybackStatus = PlaybackState.PLAYING;
-                }
-                else
-                {
-                        PlaybackStatus = PlaybackState.REWIND;
                 }
             }
             else
@@ -249,17 +233,13 @@ namespace MetalComposer
                 {
                     PlaybackStatus = PlaybackState.PAUSED;
                 }
-                else if (((TrackBar)sender).Value < 0 && PlaybackStatus != PlaybackState.REWIND)
-                {
-                    PlaybackStatus = PlaybackState.REWIND;
-                }
-                else if (((TrackBar)sender).Value > 0 && PlaybackStatus != PlaybackState.PLAYING)
+                else if (((TrackBar)sender).Value != 0 && PlaybackStatus != PlaybackState.PLAYING)
                 {
                     PlaybackStatus = PlaybackState.PLAYING;
                 }
             }
 
-            Speed = Math.Abs(tbSpeed.Value);
+            Speed = tbSpeed.Value;
             lbSpeedVal.Text = Speed + "x";
         }
     }

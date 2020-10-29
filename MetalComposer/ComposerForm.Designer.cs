@@ -191,7 +191,6 @@
             this.tbSpeed.Size = new System.Drawing.Size(268, 45);
             this.tbSpeed.TabIndex = 11;
             this.tbSpeed.Value = 1;
-            this.tbSpeed.Scroll += new System.EventHandler(this.tbSpeed_Scroll);
             this.tbSpeed.ValueChanged += new System.EventHandler(this.tbSpeed_ValueChanged);
             // 
             // lbSpeedVal

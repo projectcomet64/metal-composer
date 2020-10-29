@@ -75,7 +75,7 @@ namespace MetalComposer
                             }
                             break;
                         case LoopState.PINGPONG:
-                            PlaybackStatus = PlaybackState.REWIND;
+                            Speed *= -1;
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
                     }
@@ -89,17 +89,17 @@ namespace MetalComposer
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             break;
                         case LoopState.FORWARD:
-                            if (PlaybackStatus == PlaybackState.REWIND)
+                            if (Speed < 0)
                             {
                                 Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             }
-                            else if (PlaybackStatus == PlaybackState.PLAYING)
+                            else if (Speed > 0)
                             {
                                 Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             }
                             break;
                         case LoopState.PINGPONG:
-                            PlaybackStatus = PlaybackState.PLAYING;
+                            Speed *= -1;
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             break;
                     }
