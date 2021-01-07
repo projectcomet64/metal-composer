@@ -1,5 +1,8 @@
-﻿using MetalComposer.Properties;
+﻿using MetalComposer.Classes;
+using MetalComposer.Properties;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Windows.Forms;
 using static MetalComposer.ComposerBase;
 
@@ -241,6 +244,20 @@ namespace MetalComposer
 
             Speed = tbSpeed.Value;
             lbSpeedVal.Text = Speed + "x";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "METAL Composer JSON file (*.json) | .json";
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string jsoncontents = File.ReadAllText(ofd.FileName);
+                ExternalAnimation ea = JsonConvert.DeserializeObject<ExternalAnimation>(jsoncontents, new ExternalAnimationConverter());
+                MessageBox.Show($"{ea.Name}:\nVAL LEN:{ea.Values.Length}\nIND LEN:{ea.Indices.Length}");
+                ea.WriteToMem();
+            }
         }
     }
 }

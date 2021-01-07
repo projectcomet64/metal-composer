@@ -55,6 +55,7 @@
             this.cbSpasm = new System.Windows.Forms.CheckBox();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
@@ -188,7 +189,7 @@
             this.tbSpeed.Location = new System.Drawing.Point(53, 140);
             this.tbSpeed.Minimum = -10;
             this.tbSpeed.Name = "tbSpeed";
-            this.tbSpeed.Size = new System.Drawing.Size(268, 45);
+            this.tbSpeed.Size = new System.Drawing.Size(184, 45);
             this.tbSpeed.TabIndex = 11;
             this.tbSpeed.Value = 1;
             this.tbSpeed.ValueChanged += new System.EventHandler(this.tbSpeed_ValueChanged);
@@ -196,7 +197,7 @@
             // lbSpeedVal
             // 
             this.lbSpeedVal.AutoSize = true;
-            this.lbSpeedVal.Location = new System.Drawing.Point(327, 144);
+            this.lbSpeedVal.Location = new System.Drawing.Point(16, 163);
             this.lbSpeedVal.Name = "lbSpeedVal";
             this.lbSpeedVal.Size = new System.Drawing.Size(18, 13);
             this.lbSpeedVal.TabIndex = 12;
@@ -297,6 +298,7 @@
             // 
             // gbPlayback
             // 
+            this.gbPlayback.Controls.Add(this.button1);
             this.gbPlayback.Controls.Add(this.cbSpasm);
             this.gbPlayback.Controls.Add(this.tbCurrentFrame);
             this.gbPlayback.Controls.Add(this.lbCurrentFrame);
@@ -343,6 +345,16 @@
             this.tsmiAbout.Size = new System.Drawing.Size(52, 20);
             this.tsmiAbout.Text = "About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(249, 142);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 43);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Import MC+ JSON";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ComposerForm
             // 
@@ -402,5 +414,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.CheckBox cbCustomLoop;
         private System.Windows.Forms.CheckBox cbSpasm;
+        private System.Windows.Forms.Button button1;
     }
 }
