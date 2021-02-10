@@ -2,6 +2,7 @@
 using MetalComposer.Properties;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using static MetalComposer.ComposerBase;
@@ -10,6 +11,7 @@ namespace MetalComposer
 {
     public partial class ComposerForm : Form
     {
+        BindingSource bSource;
         public ComposerForm()
         {
             InitializeComponent();
@@ -18,7 +20,15 @@ namespace MetalComposer
             {
                 cbLoopMode.Items.Add(LoopStateNames[i]);
             }
+            bSource = new BindingSource
+            {
+                DataSource = ExternalAnimations
+            };
+            cbAnims.DisplayMember = "AnimName";
+            cbAnims.DataSource = bSource;
             cbLoopMode.SelectedIndex = 1;
+            bSource.Sort = "AnimName";
+            UpdateEnabledStatus();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -182,7 +192,13 @@ namespace MetalComposer
         private void cbOverride_CheckedChanged(object sender, EventArgs e)
         {
             OverrideAnimation = ((CheckBox)sender).Checked;
-            if (!((CheckBox)sender).Checked)
+            UpdateEnabledStatus();
+        }
+
+        void UpdateEnabledStatus()
+        {
+            gbPlayback.Enabled = gbPlusAnimations.Enabled = cbOverride.Checked;
+            if (!cbOverride.Checked && PlaybackStatus == PlaybackState.PAUSED)
             {
                 SetAnimOverride(true);
                 PlaybackStatus = PlaybackState.PLAYING;
@@ -191,7 +207,7 @@ namespace MetalComposer
 
         private void cbCustomLoop_CheckedChanged(object sender, EventArgs e)
         {
-            customLoop = ((CheckBox)sender).Checked;
+            CustomLoop = ((CheckBox)sender).Checked;
             nudEnd.Enabled = ((CheckBox)sender).Checked;
             nudStart.Enabled = ((CheckBox)sender).Checked;
             SetLoops((ushort)nudStart.Value, (ushort)nudEnd.Value);
@@ -254,10 +270,48 @@ namespace MetalComposer
             if (dr == DialogResult.OK)
             {
                 string jsoncontents = File.ReadAllText(ofd.FileName);
-                ExternalAnimation ea = JsonConvert.DeserializeObject<ExternalAnimation>(jsoncontents, new ExternalAnimationConverter());
-                MessageBox.Show($"{ea.Name}:\nVAL LEN:{ea.Values.Length}\nIND LEN:{ea.Indices.Length}");
+                ExternalAnimation ea = JsonConvert.DeserializeObject<ExternalAnimation>(jsoncontents, new JsonSerializerSettings
+                {
+                    Converters = { new ExternalAnimationConverter() },
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                });
                 ea.WriteToMem();
             }
+        }
+
+        private void btnReloadFiles_Click(object sender, EventArgs e)
+        {
+            RepopulateAnimationList();
+            bSource.ResetBindings(true);
+            UpdateCombobox();
+        }
+
+        private void UpdateCombobox()
+        {
+            if (cbAnims.Items.Count > 0)
+            {
+                cbAnims.Enabled = btnLoadSelected.Enabled = true;
+            }
+            else
+            {
+                cbAnims.Enabled = btnLoadSelected.Enabled = false;
+            }
+            cbAnims.Refresh();
+        }
+
+        private void cbAnims_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbAuthor.Text = ((ExternalAnimation)cbAnims.SelectedItem).Author;
+        }
+
+        private void btnLoadSelected_Click(object sender, EventArgs e)
+        {
+            ((ExternalAnimation)cbAnims.SelectedItem).WriteToMem();
+        }
+
+        private void btnOpenAnimFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(AnimationsPath);
         }
     }
 }

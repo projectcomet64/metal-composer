@@ -1,5 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 using M64MM.Utils;
+using MetalComposer.Classes;
+using Newtonsoft.Json;
+
 namespace MetalComposer
 {
     static class ComposerBase
@@ -15,7 +22,11 @@ namespace MetalComposer
         private static PlaybackState _playback = PlaybackState.PLAYING;
         public static bool OverrideAnimation;
         public static bool SpasmAnimation;
-        public static bool customLoop;
+        public static bool CustomLoop;
+        public static List<ExternalAnimation> ExternalAnimations = new List<ExternalAnimation>();
+        private static SettingsGroup _msettings;
+        private static string _animationsPath;
+        public static string AnimationsPath { get { return _animationsPath; } }
         public static Random RNG = new Random();
 
         public static PlaybackState PlaybackStatus
@@ -65,7 +76,7 @@ namespace MetalComposer
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
                         case LoopState.FORWARD:
-                            if (customLoop)
+                            if (CustomLoop)
                             {
                                 Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes((LoopStart)), 4));
                             }
@@ -117,7 +128,7 @@ namespace MetalComposer
             {
                 ushort _maxFrames = BitConverter.ToUInt16(
     Core.ReadBytes(Core.BaseAddress + Core.AnimDataAddress + 0xA, sizeof(ushort)), 0);
-                if (!customLoop)
+                if (!CustomLoop)
                 {
                     LoopStart = 0;
                     LoopEnd = _maxFrames;
@@ -172,11 +183,52 @@ namespace MetalComposer
 
         public static void SetLoops(ushort start, ushort end)
         {
-            if (customLoop)
+            if (CustomLoop)
             {
                 LoopStart = start;
                 LoopEnd = end;
             }
+        }
+
+        public static void RepopulateAnimationList()
+        {
+            ExternalAnimations.Clear();
+            string[] files = Directory.GetFiles(AnimationsPath, "*.json");
+            foreach (string f in files)
+            {
+                string jsonContent = File.ReadAllText(f);
+                ExternalAnimation ea = JsonConvert.DeserializeObject<ExternalAnimation>(jsonContent, new JsonSerializerSettings
+                {
+                    Converters = { new ExternalAnimationConverter() },
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                });
+                if (ea != null)
+                {
+                    ExternalAnimations.Add(ea);
+                }
+            }
+        }
+
+        public static void InitSettings()
+        {
+            _msettings = SettingsManager.GetSettingsGroup("mcomposer", false);
+            if (_msettings == null)
+            {
+                _msettings = SettingsManager.GetSettingsGroup("mcomposer", true);
+                // Default folder for animations: M64MM folder/Animations
+                _msettings.SetSettingValue("animationsPath", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Animations");
+                Core.SaveSettings();
+            }
+            _animationsPath = _msettings.GetSettingValue<string>("animationsPath");
+        }
+
+        public static void InitComposer()
+        {
+            if (!Directory.Exists(AnimationsPath))
+            {
+                Directory.CreateDirectory(AnimationsPath);
+            }
+            RepopulateAnimationList();
         }
     }
 }

@@ -53,6 +53,7 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\ExternalAnimation.cs" />
+    <Compile Include="Classes\ExternalAnimationConverter.cs" />
     <Compile Include="ComposerBase.cs" />
     <Compile Include="ComposerForm.cs">
       <SubType>Form</SubType>

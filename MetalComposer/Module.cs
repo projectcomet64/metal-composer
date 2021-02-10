@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using M64MM.Additions;
 using M64MM.Utils;
@@ -15,7 +16,7 @@ namespace MetalComposer
 
         public string SafeName => "METAL Composer";
 
-        public string Description => "Advanced SM64 Animation trainer";
+        public string Description => "Advanced SM64 Animation trainer and external animation loader";
 
         public Image AddonIcon => Resources.composer_512;
 
@@ -40,6 +41,16 @@ namespace MetalComposer
 
         public void Initialize()
         {
+            InitSettings();
+            try
+            {
+                InitComposer();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show($"METAL Composer failed to load external animations. Please check your folder or ask for help. \n{e}");
+            }
+            
         }
 
         public void OnBaseAddressFound()
