@@ -265,7 +265,7 @@ namespace MetalComposer
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "METAL Composer JSON file (*.json) | .json";
+            ofd.Filter = "METAL Composer JSON file (*.json)|*.json";
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
