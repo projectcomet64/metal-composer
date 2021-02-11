@@ -275,6 +275,12 @@ namespace MetalComposer
                     Converters = { new ExternalAnimationConverter() },
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 });
+                if (!ea.Looping)
+                {
+                    // Hardcoded. Right now I don't mind
+                    cbLoopMode.SelectedIndex = 0;
+                }
+
                 ea.WriteToMem();
             }
         }
@@ -306,6 +312,11 @@ namespace MetalComposer
 
         private void btnLoadSelected_Click(object sender, EventArgs e)
         {
+            if (!((ExternalAnimation)cbAnims.SelectedItem).Looping)
+            {
+                // Hardcoded. Right now I don't mind
+                cbLoopMode.SelectedIndex = 0;
+            }
             ((ExternalAnimation)cbAnims.SelectedItem).WriteToMem();
         }
 

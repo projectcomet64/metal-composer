@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("Metal Composer")]
-[assembly: AssemblyDescription("Advanced SM64 animation trailer")]
+[assembly: AssemblyDescription("Advanced SM64 animation trainer and loader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Project Comet")]
 [assembly: AssemblyProduct("Metal Composer")]
-[assembly: AssemblyCopyright("Copyright © GlitchyPSI 2019-2020")]
+[assembly: AssemblyCopyright("Copyright © GlitchyPSI 2019-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Puede especificar todos los valores o usar los números de compilación y de revisión predeterminados
 // mediante el carácter "*", como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]

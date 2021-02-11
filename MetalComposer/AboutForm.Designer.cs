@@ -93,9 +93,9 @@
             this.lbThanks.AutoSize = true;
             this.lbThanks.Location = new System.Drawing.Point(11, 121);
             this.lbThanks.Name = "lbThanks";
-            this.lbThanks.Size = new System.Drawing.Size(242, 13);
+            this.lbThanks.Size = new System.Drawing.Size(296, 13);
             this.lbThanks.TabIndex = 5;
-            this.lbThanks.Text = "Special thanks to James Pelster, AloXado320 and";
+            this.lbThanks.Text = "Special thanks to James Pelster, AloXado320, SuperG64 and";
             // 
             // llSM64Decomp
             // 
@@ -113,9 +113,9 @@
             this.lbReckoning.AutoSize = true;
             this.lbReckoning.Location = new System.Drawing.Point(12, 195);
             this.lbReckoning.Name = "lbReckoning";
-            this.lbReckoning.Size = new System.Drawing.Size(207, 13);
+            this.lbReckoning.Size = new System.Drawing.Size(116, 13);
             this.lbReckoning.TabIndex = 7;
-            this.lbReckoning.Text = "A single instrument does not make a band.";
+            this.lbReckoning.Text = "Zero Fungi, all Tanooki";
             // 
             // btnOK
             // 
