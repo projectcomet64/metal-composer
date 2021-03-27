@@ -73,6 +73,16 @@ namespace MetalComposer.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap currentIndex {
+            get {
+                object obj = ResourceManager.GetObject("currentIndex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap END {
             get {
                 object obj = ResourceManager.GetObject("END", resourceCulture);

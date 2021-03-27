@@ -117,38 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="metal_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\metal_512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="END" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\END.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FWD1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FWD1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAUSE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PAUSE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PLAY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PLAY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RWD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RWD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RWD1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RWD1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="START" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\START.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SWAP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SWAP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="composer_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\composer_512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="currentIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\currentIndex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

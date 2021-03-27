@@ -4,7 +4,8 @@
     {
         NONE,
         FORWARD,
-        PINGPONG
+        PINGPONG,
+        CHAINER
     }
 
 }

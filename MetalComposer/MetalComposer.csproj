@@ -52,6 +52,12 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChainerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChainerForm.Designer.cs">
+      <DependentUpon>ChainerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\ExternalAnimation.cs" />
     <Compile Include="Classes\ExternalAnimationConverter.cs" />
     <Compile Include="ComposerBase.cs" />
@@ -74,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChainerForm.resx">
+      <DependentUpon>ChainerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComposerForm.resx">
       <DependentUpon>ComposerForm.cs</DependentUpon>
@@ -126,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\composer_512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\currentIndex.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,6 +12,7 @@ namespace MetalComposer
     public partial class ComposerForm : Form
     {
         BindingSource bSource;
+        ChainerForm chainerForm;
         public ComposerForm()
         {
             InitializeComponent();
@@ -323,6 +324,15 @@ namespace MetalComposer
         private void btnOpenAnimFolder_Click(object sender, EventArgs e)
         {
             Process.Start(AnimationsPath);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (chainerForm == null)
+            {
+                chainerForm = new ChainerForm(this);
+            }
+            chainerForm.Show();
         }
     }
 }

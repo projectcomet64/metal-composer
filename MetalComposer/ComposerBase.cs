@@ -15,7 +15,8 @@ namespace MetalComposer
         {
         "None",
         "Forward",
-        "Ping-pong"
+        "Ping-pong",
+        "Chainer Bound"
         };
 
         public static LoopState LoopStatus = LoopState.FORWARD;
@@ -28,6 +29,35 @@ namespace MetalComposer
         private static string _animationsPath;
         public static string AnimationsPath { get { return _animationsPath; } }
         public static Random RNG = new Random();
+
+        // Chainer variables
+        // Consider moving these to their own class for organization's sake
+
+        public static List<ExternalAnimation> ExternalAnimationChain = new List<ExternalAnimation>();
+        public static int ExternalAnimationChainIndex { get; set; }
+        static bool _animationChainPlaying;
+        public static bool AnimationChainPlaying
+        {
+            get { return _animationChainPlaying; }
+            set
+            {
+                _animationChainPlaying = value;
+                OnAnimationChainPlaybackChange(value);
+            }
+        }
+
+        public static bool AnimationChainLoop { get; set; }
+
+        public delegate void AnimationChainIndexChange();
+
+        public static event AnimationChainIndexChange OnAnimationChainIndexChange;
+
+
+        public delegate void AnimationChainPlaybackChange(bool playing);
+
+        public static event AnimationChainPlaybackChange OnAnimationChainPlaybackChange;
+
+        // Playblack and Loop variables
 
         public static PlaybackState PlaybackStatus
         {
@@ -89,6 +119,36 @@ namespace MetalComposer
                             Speed *= -1;
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
+                        case LoopState.CHAINER:
+                            // Management of Chain inside Frame Count
+                            // TODO: Make this cleaner, its own class, don't just write the whole implementation here
+                            if (AnimationChainPlaying)
+                            {
+                                if (ExternalAnimationChainIndex == ExternalAnimationChain.Count - 1)
+                                {
+                                    if (AnimationChainLoop)
+                                    {
+                                        ExternalAnimationChainIndex = 0;
+                                        OnAnimationChainIndexChange.Invoke();
+                                        ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
+                                        Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes((ushort)value - LoopEnd), 4));
+                                    }
+                                    else
+                                    {
+                                        AnimationChainPlaying = false;
+                                        PlaybackStatus = PlaybackState.PAUSED;
+                                        Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
+                                    }
+                                }
+                                else
+                                {
+                                    ExternalAnimationChainIndex++;
+                                    OnAnimationChainIndexChange.Invoke();
+                                    ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
+                                    Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes((ushort)value - LoopEnd), 4));
+                                }
+                            }
+                            break;
                     }
                 }
                 else if (value < LoopStart)
@@ -112,6 +172,43 @@ namespace MetalComposer
                         case LoopState.PINGPONG:
                             Speed *= -1;
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
+                            break;
+                        case LoopState.CHAINER:
+                            // Management of Chain inside Frame Count
+                            if (AnimationChainPlaying)
+                            {
+                                if (ExternalAnimationChainIndex == 0)
+                                {
+                                    if (AnimationChainLoop)
+                                    {
+                                        ExternalAnimationChainIndex = ExternalAnimationChain.Count - 1;
+                                        OnAnimationChainIndexChange.Invoke();
+                                        ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
+                                        Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd + Speed), 4));
+                                    }
+                                    else
+                                    {
+                                        AnimationChainPlaying = false;
+                                        PlaybackStatus = PlaybackState.PAUSED;
+                                        Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
+                                    }
+
+                                }
+                                else
+                                {
+                                    ExternalAnimationChainIndex--;
+                                    OnAnimationChainIndexChange.Invoke();
+                                    ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
+                                    if (Speed < 0)
+                                    {
+                                        Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd + Speed), 4));
+                                    }
+                                    else if (Speed > 0)
+                                    {
+                                        Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
+                                    }
+                                }
+                            }
                             break;
                     }
                 }
