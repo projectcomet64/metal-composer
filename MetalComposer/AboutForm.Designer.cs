@@ -84,9 +84,9 @@
             this.lbDesc.AutoSize = true;
             this.lbDesc.Location = new System.Drawing.Point(86, 49);
             this.lbDesc.Name = "lbDesc";
-            this.lbDesc.Size = new System.Drawing.Size(167, 13);
+            this.lbDesc.Size = new System.Drawing.Size(220, 13);
             this.lbDesc.TabIndex = 4;
-            this.lbDesc.Text = "Advanced SM64 animation trainer";
+            this.lbDesc.Text = "Advanced SM64 animation trainer and loader\r\n";
             // 
             // lbThanks
             // 
@@ -113,9 +113,9 @@
             this.lbReckoning.AutoSize = true;
             this.lbReckoning.Location = new System.Drawing.Point(12, 195);
             this.lbReckoning.Name = "lbReckoning";
-            this.lbReckoning.Size = new System.Drawing.Size(116, 13);
+            this.lbReckoning.Size = new System.Drawing.Size(43, 13);
             this.lbReckoning.TabIndex = 7;
-            this.lbReckoning.Text = "Zero Fungi, all Tanooki";
+            this.lbReckoning.Text = "突然死";
             // 
             // btnOK
             // 
