@@ -313,6 +313,9 @@ namespace MetalComposer
 
         private void btnLoadSelected_Click(object sender, EventArgs e)
         {
+            if (cbAnims.SelectedItem == null)
+                return;
+
             if (!((ExternalAnimation)cbAnims.SelectedItem).Looping)
             {
                 // Hardcoded. Right now I don't mind

@@ -34,7 +34,16 @@ namespace MetalComposer
         // Consider moving these to their own class for organization's sake
 
         public static List<ExternalAnimation> ExternalAnimationChain = new List<ExternalAnimation>();
-        public static int ExternalAnimationChainIndex { get; set; }
+        static int _animationChainIndex;
+        public static int ExternalAnimationChainIndex
+        {
+            get { return _animationChainIndex; }
+            set
+            {
+                _animationChainIndex = value;
+                OnAnimationChainIndexChange.Invoke();
+            }
+        }
         static bool _animationChainPlaying;
         public static bool AnimationChainPlaying
         {
@@ -129,7 +138,6 @@ namespace MetalComposer
                                     if (AnimationChainLoop)
                                     {
                                         ExternalAnimationChainIndex = 0;
-                                        OnAnimationChainIndexChange.Invoke();
                                         ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
                                         Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes((ushort)value - LoopEnd), 4));
                                     }
@@ -143,7 +151,6 @@ namespace MetalComposer
                                 else
                                 {
                                     ExternalAnimationChainIndex++;
-                                    OnAnimationChainIndexChange.Invoke();
                                     ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
                                     Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes((ushort)value - LoopEnd), 4));
                                 }
@@ -182,7 +189,6 @@ namespace MetalComposer
                                     if (AnimationChainLoop)
                                     {
                                         ExternalAnimationChainIndex = ExternalAnimationChain.Count - 1;
-                                        OnAnimationChainIndexChange.Invoke();
                                         ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
                                         Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd + Speed), 4));
                                     }
@@ -197,7 +203,6 @@ namespace MetalComposer
                                 else
                                 {
                                     ExternalAnimationChainIndex--;
-                                    OnAnimationChainIndexChange.Invoke();
                                     ExternalAnimationChain[ExternalAnimationChainIndex].WriteToMem();
                                     if (Speed < 0)
                                     {

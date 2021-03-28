@@ -88,6 +88,7 @@ namespace MetalComposer
                 AnimationTimer = (short)LoopStart;
                 AnimationChainPlaying = true;
                 nudChainlink.Enabled = false;
+                btnSetLink.Enabled = false;
             }
             else
             {
@@ -97,20 +98,21 @@ namespace MetalComposer
                 }
                 AnimationChainPlaying = false;
                 nudChainlink.Enabled = true;
+                btnSetLink.Enabled = true;
             }
             UpdatePlayChainButtonText(AnimationChainPlaying);
         }
 
         private void nudChainlink_Scroll(object sender, ScrollEventArgs e)
         {
-            ExternalAnimationChainIndex = (int)nudChainlink.Value;
+            lbChainList.Refresh();
         }
 
         private void UpdateChainlinkIndex()
         {
             lbChainList.Refresh();
             nudChainlink.Value = ExternalAnimationChainIndex;
-            nudChainlink.Maximum = ExternalAnimationChain.Count - 1;
+            nudChainlink.Maximum = Math.Max(0, ExternalAnimationChain.Count - 1);
         }
 
         private void lbChainList_DrawItem(object sender, DrawItemEventArgs e)
@@ -172,6 +174,11 @@ namespace MetalComposer
             lbChainList.SelectedIndex++;
             bSource.ResetBindings(true);
             lbChainList.Refresh();
+        }
+
+        private void btnSetLink_Click(object sender, EventArgs e)
+        {
+            ExternalAnimationChainIndex = (int)nudChainlink.Value;
         }
     }
 }

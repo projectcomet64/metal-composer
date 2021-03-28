@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChainerForm));
             this.lbChainList = new System.Windows.Forms.ListBox();
             this.btnAddSelected = new System.Windows.Forms.Button();
             this.gbChain = new System.Windows.Forms.GroupBox();
@@ -38,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnPlayChain = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.btnSetLink = new System.Windows.Forms.Button();
             this.gbChain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudChainlink)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +68,7 @@
             // 
             // gbChain
             // 
+            this.gbChain.Controls.Add(this.btnSetLink);
             this.gbChain.Controls.Add(this.cbLoopChain);
             this.gbChain.Controls.Add(this.btnMvDown);
             this.gbChain.Controls.Add(this.btnMvUp);
@@ -114,7 +117,7 @@
             // 
             // nudChainlink
             // 
-            this.nudChainlink.Location = new System.Drawing.Point(27, 61);
+            this.nudChainlink.Location = new System.Drawing.Point(9, 68);
             this.nudChainlink.Name = "nudChainlink";
             this.nudChainlink.Size = new System.Drawing.Size(43, 20);
             this.nudChainlink.TabIndex = 2;
@@ -150,6 +153,16 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
+            // btnSetLink
+            // 
+            this.btnSetLink.Location = new System.Drawing.Point(58, 68);
+            this.btnSetLink.Name = "btnSetLink";
+            this.btnSetLink.Size = new System.Drawing.Size(37, 20);
+            this.btnSetLink.TabIndex = 6;
+            this.btnSetLink.Text = "Set";
+            this.btnSetLink.UseVisualStyleBackColor = true;
+            this.btnSetLink.Click += new System.EventHandler(this.btnSetLink_Click);
+            // 
             // ChainerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +174,7 @@
             this.Controls.Add(this.lbChainList);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ChainerForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -184,5 +198,6 @@
         private System.Windows.Forms.Button btnPlayChain;
         private System.Windows.Forms.CheckBox cbLoopChain;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnSetLink;
     }
 }

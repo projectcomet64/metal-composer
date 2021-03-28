@@ -57,13 +57,13 @@
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.gbPlusAnimations = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.lbAuthor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbAnims = new System.Windows.Forms.ComboBox();
             this.btnOpenAnimFolder = new System.Windows.Forms.Button();
             this.btnReloadFiles = new System.Windows.Forms.Button();
             this.btnLoadSelected = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbCurrentFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
@@ -381,6 +381,16 @@
             this.gbPlusAnimations.TabStop = false;
             this.gbPlusAnimations.Text = "METAL Composer PLUS";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(129, 74);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 24);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Open Chainer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // lbAuthor
             // 
             this.lbAuthor.AutoEllipsis = true;
@@ -401,7 +411,8 @@
             // 
             // cbAnims
             // 
-            this.cbAnims.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnims.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbAnims.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbAnims.FormattingEnabled = true;
             this.cbAnims.Location = new System.Drawing.Point(9, 47);
             this.cbAnims.Name = "cbAnims";
@@ -439,16 +450,6 @@
             this.btnLoadSelected.Text = "Load Selected";
             this.btnLoadSelected.UseVisualStyleBackColor = true;
             this.btnLoadSelected.Click += new System.EventHandler(this.btnLoadSelected_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(129, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 24);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Open Chainer";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // ComposerForm
             // 
