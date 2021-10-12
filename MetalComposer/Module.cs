@@ -6,7 +6,9 @@ using System.Windows.Forms;
 using M64MM.Additions;
 using M64MM.Utils;
 using MetalComposer.Properties;
+
 using static MetalComposer.ComposerBase;
+
 namespace MetalComposer
 {
     public class Module : IModule

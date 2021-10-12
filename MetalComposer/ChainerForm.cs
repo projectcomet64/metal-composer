@@ -17,6 +17,7 @@ namespace MetalComposer
     {
         ComposerForm composerForm;
         BindingSource bSource;
+        BindingSource extAnimSource;
         public ChainerForm(ComposerForm parentForm)
         {
             InitializeComponent();
@@ -32,16 +33,25 @@ namespace MetalComposer
             {
                 DataSource = ExternalAnimationChain
             };
+            extAnimSource = new BindingSource
+            {
+                DataSource = ExternalAnimations
+            };
+            lbLoadedAnimations.DisplayMember = "AnimName";
+            lbLoadedAnimations.DataSource = extAnimSource;
             lbChainList.DisplayMember = "AnimName";
             lbChainList.DataSource = bSource;
             nudChainlink.Maximum = 0;
             OnAnimationChainIndexChange += () => UpdateChainlinkIndex();
             OnAnimationChainPlaybackChange += (p) => UpdatePlayChainButtonText(p);
+            bSource.ResetBindings(true);
+            extAnimSource.ResetBindings(true);
         }
 
         private void btnAddSelected_Click(object sender, EventArgs e)
         {
-            ExternalAnimationChain.Add((ExternalAnimation)composerForm.cbAnims.SelectedItem);
+            if (lbLoadedAnimations.SelectedItems.Count == 0) return;
+            ExternalAnimationChain.AddRange(lbLoadedAnimations.SelectedItems.Cast<ExternalAnimation>());
             bSource.ResetBindings(true);
             nudChainlink.Maximum = Math.Max(0, ExternalAnimationChain.Count - 1);
             if (ExternalAnimationChain.Count > 0)
@@ -174,6 +184,12 @@ namespace MetalComposer
             lbChainList.SelectedIndex++;
             bSource.ResetBindings(true);
             lbChainList.Refresh();
+        }
+
+        public void UpdateAllLists()
+        {
+            extAnimSource.ResetBindings(true);
+            bSource.ResetBindings(true);
         }
 
         private void btnSetLink_Click(object sender, EventArgs e)

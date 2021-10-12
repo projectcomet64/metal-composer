@@ -335,6 +335,7 @@ namespace MetalComposer
             {
                 chainerForm = new ChainerForm(this);
             }
+            chainerForm.UpdateAllLists();
             chainerForm.Show();
         }
     }
