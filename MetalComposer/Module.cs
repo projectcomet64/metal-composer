@@ -43,16 +43,6 @@ namespace MetalComposer
 
         public void Initialize()
         {
-            InitSettings();
-            try
-            {
-                InitComposer();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show($"METAL Composer failed to load external animations. Please check your folder or ask for help. \n{e}");
-            }
-            
         }
 
         public void OnBaseAddressFound()
@@ -67,7 +57,17 @@ namespace MetalComposer
 
         public void ShowForm()
         {
-            if (form == null || form.IsDisposed) form = new ComposerForm();
+            if (form == null || form.IsDisposed) {
+                form = new ComposerForm();
+
+                InitSettings();
+                try {
+                    InitComposer();
+                }
+                catch (Exception e) {
+                    MessageBox.Show($"METAL Composer failed to load external animations. Please check your folder or ask for help. \n{e}");
+                }
+            }
 
             if (!form.Visible)
                 form.Show();
@@ -83,8 +83,8 @@ namespace MetalComposer
 
         }
 
-        public void Update()
-        {
+        public void Update() {
+            if (form == null || !form.IsHandleCreated) return;
             form?.Invoke(new MethodInvoker(delegate ()
             {
                 if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing))

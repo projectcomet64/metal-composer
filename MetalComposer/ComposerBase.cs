@@ -314,8 +314,7 @@ namespace MetalComposer
         public static void InitSettings()
         {
             _msettings = SettingsManager.GetSettingsGroup("mcomposer", false);
-            if (_msettings == null)
-            {
+            if (_msettings == null) {
                 _msettings = SettingsManager.GetSettingsGroup("mcomposer", true);
                 // Default folder for animations: M64MM folder/Animations
                 _msettings.SetSettingValue("animationsPath", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Animations");
