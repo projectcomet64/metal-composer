@@ -9,10 +9,8 @@ using MetalComposer.Properties;
 
 using static MetalComposer.ComposerBase;
 
-namespace MetalComposer
-{
-    public class Module : IModule
-    {
+namespace MetalComposer {
+    public class Module : IModule {
 
         ComposerForm form;
 
@@ -22,18 +20,15 @@ namespace MetalComposer
 
         public Image AddonIcon => Resources.composer_512;
 
-        public void Close(EventArgs e)
-        {
+        public void Close(EventArgs e) {
             OverrideAnimation = false;
             SetAnimOverride(true);
-            if (form != null)
-            {
+            if (form != null) {
                 form.Close();
             }
         }
 
-        public List<ToolCommand> GetCommands()
-        {
+        public List<ToolCommand> GetCommands() {
             List<ToolCommand> retList = new List<ToolCommand>();
             ToolCommand showForm = new ToolCommand("Open METAL Composer");
             showForm.Summoned += (a, b) => ShowForm();
@@ -41,22 +36,18 @@ namespace MetalComposer
             return retList;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() {
         }
 
-        public void OnBaseAddressFound()
-        {
-
-        }
-
-        public void OnBaseAddressZero()
-        {
+        public void OnBaseAddressFound() {
 
         }
 
-        public void ShowForm()
-        {
+        public void OnBaseAddressZero() {
+
+        }
+
+        public void ShowForm() {
             if (form == null || form.IsDisposed) {
                 form = new ComposerForm();
 
@@ -72,51 +63,44 @@ namespace MetalComposer
             if (!form.Visible)
                 form.Show();
 
-            if (form.WindowState == FormWindowState.Minimized)
-            {
+            if (form.WindowState == FormWindowState.Minimized) {
                 form.WindowState = FormWindowState.Normal;
             }
         }
 
-        public void Reset()
-        {
+        public void Reset() {
 
         }
 
         public void Update() {
+            
+            if (OverrideAnimation) {
+                SetAnimOverride(false);
+                if (PlaybackStatus != PlaybackState.PAUSED)
+                    AnimationTimer += (short)Speed;
+            }
+            if (SpasmAnimation) {
+                SetAnimSpasm();
+                AnimationTimer = (short)RNG.Next(0, MaxFrames);
+            }
+
             if (form == null || !form.IsHandleCreated) return;
-            form?.Invoke(new MethodInvoker(delegate ()
-            {
-                if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing))
-                {
+            form?.BeginInvoke(new MethodInvoker(delegate () {
+                if (Core.CurrentLevelID > 3 && form != null && (form.IsDisposed == false || form.Disposing)) {
                     Core.ValidateAnimDataAddress();
-                    if (Core.ValidateAnimDataAddress())
-                    {
-                        form.UpdateCoreAddressText(0);
-                        if (OverrideAnimation)
-                        {
-                            SetAnimOverride(false);
-                            if (PlaybackStatus != PlaybackState.PAUSED)
-                            AnimationTimer += (short)Speed;
-                        }
-                        if (SpasmAnimation)
-                        {
-                            SetAnimSpasm();
-                            AnimationTimer = (short)RNG.Next(0, MaxFrames);
-                        }
+                    if (Core.ValidateAnimDataAddress()) {
+                        form.UpdatePlaybackStatus();
                         form.UpdateMaxFrames(MaxFrames);
                         form.UpdateFramesTimer(AnimationTimer);
                     }
-                    else
-                    {
+                    else {
                         form.UpdateFramesTimer(0, true);
                     }
                 }
             }));
         }
 
-        public void OnCoreEntAddressChange(uint addr)
-        {
+        public void OnCoreEntAddressChange(uint addr) {
 
         }
     }

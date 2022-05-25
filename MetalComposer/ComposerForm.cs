@@ -87,9 +87,9 @@ namespace MetalComposer
 
         }
 
-        public void UpdateCoreAddressText(long address)
+        public void UpdatePlaybackStatus()
         {
-            label1.Text = "Playback status: " + PlaybackStatus.ToString();
+            label1.Text = "Playback status: " + PlaybackStatus;
         }
 
         public void HandlePlaybackChange(PlaybackState oldState, PlaybackState newState)

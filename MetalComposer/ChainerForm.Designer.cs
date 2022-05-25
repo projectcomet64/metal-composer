@@ -175,6 +175,7 @@
             this.lbLoadedAnimations.Size = new System.Drawing.Size(255, 368);
             this.lbLoadedAnimations.Sorted = true;
             this.lbLoadedAnimations.TabIndex = 0;
+            this.lbLoadedAnimations.DoubleClick += new System.EventHandler(this.lbLoadedAnimations_DoubleClick);
             // 
             // label2
             // 
