@@ -93,9 +93,9 @@
             this.lbThanks.AutoSize = true;
             this.lbThanks.Location = new System.Drawing.Point(11, 121);
             this.lbThanks.Name = "lbThanks";
-            this.lbThanks.Size = new System.Drawing.Size(296, 13);
+            this.lbThanks.Size = new System.Drawing.Size(362, 13);
             this.lbThanks.TabIndex = 5;
-            this.lbThanks.Text = "Special thanks to James Pelster, AloXado320, SuperG64 and";
+            this.lbThanks.Text = "Special thanks to James Pelster, AloXado320, SuperG64, Dommypwnz and";
             // 
             // llSM64Decomp
             // 

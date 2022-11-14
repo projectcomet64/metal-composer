@@ -93,7 +93,9 @@ namespace MetalComposer
 
         public static ushort LoopStart = 0;
         public static ushort LoopEnd = MaxFrames;
-        public static int Speed = 1;
+        public static bool Reverse = false;
+        internal static int _speed = 1;
+        public static int Speed => _speed * (Reverse ? -1 : 1) * (PlaybackStatus == PlaybackState.PAUSED ? 0 : 1);
 
         public static short AnimationTimer
         {
@@ -125,12 +127,13 @@ namespace MetalComposer
                             }
                             break;
                         case LoopState.PINGPONG:
-                            Speed *= -1;
+                            Reverse = !Reverse;
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             break;
                         case LoopState.CHAINER:
                             // Management of Chain inside Frame Count
                             // TODO: Make this cleaner, its own class, don't just write the whole implementation here
+                            // later
                             if (AnimationChainPlaying)
                             {
                                 if (ExternalAnimationChainIndex == ExternalAnimationChain.Count - 1)
@@ -167,17 +170,17 @@ namespace MetalComposer
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             break;
                         case LoopState.FORWARD:
-                            if (Speed < 0)
+                            if (Reverse)
                             {
                                 Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopEnd), 4));
                             }
-                            else if (Speed > 0)
+                            else
                             {
                                 Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             }
                             break;
                         case LoopState.PINGPONG:
-                            Speed *= -1;
+                            Reverse = !Reverse;
                             Core.WriteBytes(Core.BaseAddress + Core.CoreEntityAddress + 0x42, Core.SwapEndian(BitConverter.GetBytes(LoopStart), 4));
                             break;
                         case LoopState.CHAINER:
@@ -329,7 +332,6 @@ namespace MetalComposer
             {
                 Directory.CreateDirectory(AnimationsPath);
             }
-            RepopulateAnimationList();
         }
     }
 }

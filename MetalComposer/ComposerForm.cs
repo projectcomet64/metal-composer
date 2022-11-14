@@ -25,11 +25,14 @@ namespace MetalComposer
             {
                 DataSource = ExternalAnimations
             };
+            UpdateEnabledStatus();
+            RepopulateAnimationList();
+            bSource.ResetBindings(true);
             cbAnims.DisplayMember = "AnimName";
             cbAnims.DataSource = bSource;
             cbLoopMode.SelectedIndex = 1;
             bSource.Sort = "AnimName";
-            UpdateEnabledStatus();
+            UpdateCombobox();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -89,7 +92,7 @@ namespace MetalComposer
 
         public void UpdatePlaybackStatus()
         {
-            label1.Text = "Playback status: " + PlaybackStatus;
+            lbStatus.Text = $"Playback status: {PlaybackStatus} {(Reverse ? "(In reverse)" : "")}";
         }
 
         public void HandlePlaybackChange(PlaybackState oldState, PlaybackState newState)
@@ -107,10 +110,6 @@ namespace MetalComposer
                             btnPlay.BackgroundImage = Resources.PAUSE;
                             btnRwd.BackgroundImage = Resources.SWAP;
                             break;
-                        case PlaybackState.REWIND:
-                            btnRwd.BackgroundImage = Resources.SWAP;
-                            btnPlay.BackgroundImage = Resources.PAUSE;
-                            break;
                     }
                     break;
                 case PlaybackState.PLAYING:
@@ -123,10 +122,6 @@ namespace MetalComposer
                             btnPlay.BackgroundImage = Resources.PLAY;
                             btnRwd.BackgroundImage = Resources.RWD;
                             break;
-                        case PlaybackState.REWIND:
-                            btnRwd.BackgroundImage = Resources.SWAP;
-                            btnPlay.BackgroundImage = Resources.PLAY;
-                            break;
                     }
                     break;
             }
@@ -135,15 +130,15 @@ namespace MetalComposer
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (tbSpeed.Value == 0)
-            {
-                tbSpeed.Value = 1;
+            switch (PlaybackStatus) {
+                case PlaybackState.PAUSED:
+                    PlaybackStatus = PlaybackState.PLAYING;
+                    break;
+                case PlaybackState.PLAYING:
+                    PlaybackStatus = PlaybackState.PAUSED;
+                    break;
             }
-            if (tbSpeed.Value < 0)
-            {
-                tbSpeed.Value *= -1;
-            }
-            PlaybackStatus = PlaybackState.PLAYING;
+            
 
         }
 
@@ -152,11 +147,11 @@ namespace MetalComposer
             if (PlaybackStatus == PlaybackState.PAUSED)
             {
                 PlaybackStatus = PlaybackState.PLAYING;
-                tbSpeed.Value = -1;
+                Reverse = !Reverse;
             }
             else
             {
-                tbSpeed.Value *= -1;
+                Reverse = !Reverse;
             }
         }
 
@@ -239,6 +234,7 @@ namespace MetalComposer
         private void tbSpeed_ValueChanged(object sender, EventArgs e)
         {
             //FIXME: Find a way to make this cleaner...
+            //TODO: Make a custom control, only way you can do that
 
             if (PlaybackStatus == PlaybackState.PAUSED)
             {
@@ -259,7 +255,7 @@ namespace MetalComposer
                 }
             }
 
-            Speed = tbSpeed.Value;
+            _speed = tbSpeed.Value;
             lbSpeedVal.Text = Speed + "x";
         }
 
@@ -308,7 +304,7 @@ namespace MetalComposer
 
         private void cbAnims_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbAuthor.Text = ((ExternalAnimation)cbAnims.SelectedItem).Author;
+            lbAuthor.Text = $"Credits: {((ExternalAnimation)cbAnims.SelectedItem).Author}";
         }
 
         private void btnLoadSelected_Click(object sender, EventArgs e)

@@ -3,7 +3,6 @@
     public enum PlaybackState
     {
         PAUSED,
-        PLAYING,
-        REWIND
+        PLAYING
     }
 }

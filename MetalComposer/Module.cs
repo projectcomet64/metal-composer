@@ -49,9 +49,8 @@ namespace MetalComposer {
 
         public void ShowForm() {
             if (form == null || form.IsDisposed) {
-                form = new ComposerForm();
-
                 InitSettings();
+                form = new ComposerForm();
                 try {
                     InitComposer();
                 }
